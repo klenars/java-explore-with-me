@@ -22,6 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<modules>
+		<module>ewmGateway</module>
+		<module>ewmServer</module>
+	</modules>
+
 	<build>
 		<pluginManagement>
 			<plugins>
