@@ -23,7 +23,7 @@
 	</properties>
 
 	<modules>
-		<module>ewmGateway</module>
+		<module>ewmStat</module>
 		<module>ewmServer</module>
 	</modules>
 
