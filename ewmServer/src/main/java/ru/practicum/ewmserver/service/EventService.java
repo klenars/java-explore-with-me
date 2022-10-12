@@ -1,8 +1,8 @@
 package ru.practicum.ewmserver.service;
 
-import ru.practicum.ewmserver.dto.EventFullDto;
-import ru.practicum.ewmserver.dto.EventShortDto;
-import ru.practicum.ewmserver.dto.EventsRequestParamsDto;
+import ru.practicum.ewmserver.dto.event.EventFullDto;
+import ru.practicum.ewmserver.dto.event.EventShortDto;
+import ru.practicum.ewmserver.dto.event.EventsRequestParamsDto;
 
 import java.util.List;
 

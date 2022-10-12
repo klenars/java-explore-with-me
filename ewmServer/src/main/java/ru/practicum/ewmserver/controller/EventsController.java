@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewmserver.dto.EventFullDto;
-import ru.practicum.ewmserver.dto.EventShortDto;
-import ru.practicum.ewmserver.dto.EventsRequestParamsDto;
+import ru.practicum.ewmserver.dto.event.EventFullDto;
+import ru.practicum.ewmserver.dto.event.EventShortDto;
+import ru.practicum.ewmserver.dto.event.EventsRequestParamsDto;
 import ru.practicum.ewmserver.service.EventService;
 
 import java.util.List;

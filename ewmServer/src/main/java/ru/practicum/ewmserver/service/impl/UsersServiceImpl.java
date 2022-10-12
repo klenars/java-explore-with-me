@@ -3,20 +3,23 @@ package ru.practicum.ewmserver.service.impl;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.EventsRequestParamsDto;
-import ru.practicum.ewmserver.service.EventService;
+import ru.practicum.ewmserver.dto.event.NewEventDto;
+import ru.practicum.ewmserver.service.UsersService;
 
 import java.util.List;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class UsersServiceImpl implements UsersService {
+
+
+
     @Override
-    public EventFullDto getEventById(long id) {
+    public List<EventShortDto> getAll(long userId, int from, int size) {
         return null;
     }
 
     @Override
-    public List<EventShortDto> getAllEvents(EventsRequestParamsDto params) {
+    public EventFullDto createEvent(long userId, NewEventDto newEventDto) {
         return null;
     }
 }
