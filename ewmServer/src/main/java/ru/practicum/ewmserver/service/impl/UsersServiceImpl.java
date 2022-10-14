@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UsersServiceImpl implements UsersService {
 
-
+//TODO
 
     @Override
     public List<EventShortDto> getAll(long userId, int from, int size) {

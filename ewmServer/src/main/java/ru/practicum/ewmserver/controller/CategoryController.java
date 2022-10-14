@@ -3,21 +3,20 @@ package ru.practicum.ewmserver.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewmserver.dto.compilation.CompilationDto;
+import ru.practicum.ewmserver.dto.category.CategoryDto;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
-@RequestMapping("/compilations")
+@RequestMapping("/categories")
 @RequiredArgsConstructor
 @Validated
-public class CompilationController {
+public class CategoryController {
 
     @GetMapping
-    public List<CompilationDto> getAll(
-            @RequestParam(required = false) boolean pinned,
+    public List<CategoryDto> getAll(
             @PositiveOrZero @RequestParam(defaultValue = "0") int from,
             @Positive @RequestParam(defaultValue = "10") int size
     ) {
@@ -25,10 +24,8 @@ public class CompilationController {
         return null;
     }
 
-    @GetMapping("/{compId}")
-    public CompilationDto getById(
-            @PathVariable long compId
-    ) {
+    @GetMapping("/{catId}")
+    public CategoryDto getById(@PathVariable long catId) {
         //TODO
         return null;
     }

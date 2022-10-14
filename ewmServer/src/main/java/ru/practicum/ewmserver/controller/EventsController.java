@@ -21,7 +21,6 @@ public class EventsController {
 
     private final EventService eventService;
 
-    //http://localhost:8080/events?text=text&categories=1&categories=2&categories=3&paid=true&rangeStart="2025-09-13 21:00:00"&rangeEnd="2025-09-13 21:00:00"&onlyAvailable=true&sort=EVENT_DATE&from=20&size=10
     @GetMapping
     public List<EventShortDto> getAllEvents(EventsRequestParamsDto params) {
         log.info("GET with params: {}", params);
