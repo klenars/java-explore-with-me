@@ -9,9 +9,9 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class EventsRequestParamsDto {
+public class EventsRequestParams {
     private String text;
-    private List<Integer> categories;
+    private List<Long> categories;
     private boolean paid;
     private String rangeStart;
     private String rangeEnd;
@@ -19,4 +19,8 @@ public class EventsRequestParamsDto {
     private EventSortType sort;
     private int from;
     private int size;
+
+    public EventsRequestParams() {
+        this.size = 10;
+    }
 }

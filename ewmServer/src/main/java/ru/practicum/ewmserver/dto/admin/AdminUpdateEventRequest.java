@@ -1,20 +1,19 @@
-package ru.practicum.ewmserver.dto.event;
+package ru.practicum.ewmserver.dto.admin;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
+import ru.practicum.ewmserver.dto.location.LocationDto;
 
 @Getter
 @Setter
-public class UpdateEventRequest {
+public class AdminUpdateEventRequest {
     private String annotation;
     private long category;
     private String description;
     private String eventDate;
-    @NotNull
-    private Long eventId;
+    private LocationDto location;
     private boolean paid;
     private int participantLimit;
+    private boolean requestModeration;
     private String title;
 }

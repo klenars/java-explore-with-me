@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.EventsRequestParamsDto;
+import ru.practicum.ewmserver.dto.event.EventsRequestParams;
 import ru.practicum.ewmserver.service.EventService;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class EventsController {
     private final EventService eventService;
 
     @GetMapping
-    public List<EventShortDto> getAllEvents(EventsRequestParamsDto params) {
+    public List<EventShortDto> getAllEvents(EventsRequestParams params) {
         log.info("GET with params: {}", params);
         return eventService.getAllEvents(params);
     }
