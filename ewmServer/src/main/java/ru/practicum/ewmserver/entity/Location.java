@@ -20,4 +20,14 @@ public class Location {
 
     @OneToOne
     private Event event;
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", eventId=" + (event != null ? event.getId() : "null") +
+                '}';
+    }
 }

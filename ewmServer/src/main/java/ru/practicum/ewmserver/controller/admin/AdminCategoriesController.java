@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
 import ru.practicum.ewmserver.dto.category.NewCategoryDto;
+import ru.practicum.ewmserver.service.AdminCategoriesService;
 
 @RestController
 @RequestMapping("/admin/categories")
 @RequiredArgsConstructor
-public class adminCategoriesController {
+public class AdminCategoriesController {
     //TODO
+
+    private final AdminCategoriesService adminCategoriesService;
 
     @PatchMapping
     public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto) {
@@ -18,9 +21,8 @@ public class adminCategoriesController {
     }
 
     @PostMapping
-    public CategoryDto updateCategory(@RequestBody NewCategoryDto newCategoryDto) {
-        //TODO
-        return null;
+    public CategoryDto createCategory(@RequestBody NewCategoryDto newCategoryDto) {
+        return adminCategoriesService.createCategory(newCategoryDto);
     }
 
     @DeleteMapping("/{catId}")

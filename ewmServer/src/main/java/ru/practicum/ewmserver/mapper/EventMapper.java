@@ -6,9 +6,12 @@ import org.mapstruct.Named;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
 import ru.practicum.ewmserver.dto.event.NewEventDto;
+import ru.practicum.ewmserver.entity.Category;
 import ru.practicum.ewmserver.entity.Event;
+import ru.practicum.ewmserver.entity.User;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Mapper(uses = {CategoryMapper.class, LocationMapper.class, UserMapper.class})
 public interface EventMapper {
@@ -25,10 +28,12 @@ public interface EventMapper {
 
     @Mapping(target = "eventDate", expression = "java( parseDate(newEventDto.getEventDate()) )")
     @Mapping(target = "location", qualifiedByName = "toEntity")
-    @Mapping(target = "category", ignore = true)
-    Event toEntity(NewEventDto newEventDto);
+    @Mapping(target = "category", expression = "java( category )")
+    @Mapping(target = "initiator", expression = "java( initiator )")
+    @Mapping(target = "id", ignore = true)
+    Event toEntity(NewEventDto newEventDto, Category category, User initiator);
 
     default LocalDateTime parseDate(String date) {
-        return LocalDateTime.parse(date);
+        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

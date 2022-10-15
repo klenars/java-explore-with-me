@@ -1,18 +1,27 @@
 package ru.practicum.ewmserver.error;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@AllArgsConstructor
 @Getter
 public class ApiError {
-    private final List<String> errors;
+
     private final String message;
     private final String reason;
     private final HttpStatus status;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime timestamp;
+    private final List<StackTraceElement> errors;
+
+    public ApiError(RuntimeException exception, HttpStatus status) {
+        this.message = exception.getMessage();
+        this.reason = exception.getCause().getLocalizedMessage();
+        this.status = status;
+        this.timestamp = LocalDateTime.now();
+        this.errors = List.of(exception.getStackTrace());
+    }
 }

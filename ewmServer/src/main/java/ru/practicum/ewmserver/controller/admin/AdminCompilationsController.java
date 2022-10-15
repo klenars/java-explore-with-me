@@ -8,7 +8,7 @@ import ru.practicum.ewmserver.dto.compilation.NewCompilationDto;
 @RestController
 @RequestMapping("/admin/compilations")
 @RequiredArgsConstructor
-public class adminCompilationsController {
+public class AdminCompilationsController {
     //TODO
 
     @PostMapping
