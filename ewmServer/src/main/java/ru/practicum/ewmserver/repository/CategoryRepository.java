@@ -2,7 +2,8 @@ package ru.practicum.ewmserver.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.practicum.ewmserver.entity.Category;
-import ru.practicum.ewmserver.error.EntityNotFoundException;
+
+import javax.persistence.EntityNotFoundException;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     default Category getById(Long id) {

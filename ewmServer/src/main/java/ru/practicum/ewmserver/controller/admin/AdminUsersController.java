@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 public class AdminUsersController {
-    //TODO
+
     private final AdminUserService adminUserService;
 
     @GetMapping
@@ -28,8 +28,7 @@ public class AdminUsersController {
             @PositiveOrZero @RequestParam(defaultValue = "0") int from,
             @Positive @RequestParam(defaultValue = "10") int size
     ) {
-        //TODO
-        return null;
+        return adminUserService.getAll(ids, from, size);
     }
 
     @PostMapping
@@ -41,6 +40,6 @@ public class AdminUsersController {
 
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable long userId) {
-        //TODO
+        adminUserService.deleteUser(userId);
     }
 }

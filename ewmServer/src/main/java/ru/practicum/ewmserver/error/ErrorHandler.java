@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.EntityNotFoundException;
+
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
@@ -27,6 +29,12 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleIllegalArgumentException(final IllegalArgumentException exception) {
+        return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleConstraintViolationException(final javax.validation.ConstraintViolationException exception) {
         return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
     }
 }
