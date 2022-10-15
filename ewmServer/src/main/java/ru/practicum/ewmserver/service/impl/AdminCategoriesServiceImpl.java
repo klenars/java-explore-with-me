@@ -2,6 +2,7 @@ package ru.practicum.ewmserver.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
 import ru.practicum.ewmserver.dto.category.NewCategoryDto;
 import ru.practicum.ewmserver.entity.Category;
@@ -21,5 +22,20 @@ public class AdminCategoriesServiceImpl implements AdminCategoriesService {
         Category newCategory = categoryMapper.newToEntity(newCategoryDto);
 
         return categoryMapper.toDto(categoryRepository.save(newCategory));
+    }
+
+    @Override
+    @Transactional
+    public CategoryDto updateCategory(CategoryDto categoryDto) {
+        Category category = categoryRepository.getById(categoryDto.getId());
+        category.setName(categoryDto.getName());
+
+        return categoryMapper.toDto(category);
+    }
+
+    @Override
+    public void deleteCategory(long catId) {
+        Category category = categoryRepository.getById(catId);
+        categoryRepository.delete(category);
     }
 }

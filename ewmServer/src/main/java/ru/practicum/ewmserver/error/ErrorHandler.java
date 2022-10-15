@@ -14,13 +14,19 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleConflictError(final ConstraintViolationException exception) {
-        return new ApiError(exception, HttpStatus.CONFLICT);
+        return new ApiError(exception, "Ошибка уникальности.", HttpStatus.CONFLICT);
     }
 
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleEntityNotFoundException(final EntityNotFoundException exception) {
-        return new ApiError(exception, HttpStatus.NOT_FOUND);
+        return new ApiError(exception, "Требуемый объект не найден.", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleIllegalArgumentException(final IllegalArgumentException exception) {
+        return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
     }
 }

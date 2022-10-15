@@ -10,14 +10,12 @@ import ru.practicum.ewmserver.service.AdminCategoriesService;
 @RequestMapping("/admin/categories")
 @RequiredArgsConstructor
 public class AdminCategoriesController {
-    //TODO
 
     private final AdminCategoriesService adminCategoriesService;
 
     @PatchMapping
     public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto) {
-        //TODO
-        return null;
+        return adminCategoriesService.updateCategory(categoryDto);
     }
 
     @PostMapping
@@ -27,6 +25,6 @@ public class AdminCategoriesController {
 
     @DeleteMapping("/{catId}")
     public void deleteCategory(@PathVariable long catId) {
-        //TODO
+        adminCategoriesService.deleteCategory(catId);
     }
 }
