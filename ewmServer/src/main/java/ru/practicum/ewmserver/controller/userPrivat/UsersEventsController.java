@@ -2,6 +2,7 @@ package ru.practicum.ewmserver.controller.userPrivat;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users/{userId}/events")
 @RequiredArgsConstructor
+@Validated
 public class UsersEventsController {
 
     private final UsersService usersService;
@@ -42,6 +44,8 @@ public class UsersEventsController {
             @PathVariable long userId,
             @RequestBody NewEventDto newEventDto
     ) {
+        log.info("UsersEventsController POST createEvent, got userID: {}, NewEventDto: {}", userId, newEventDto);
+
         return usersService.createEvent(userId, newEventDto);
     }
 
