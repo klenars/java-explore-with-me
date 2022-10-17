@@ -13,6 +13,7 @@ import ru.practicum.ewmserver.entity.Category;
 import ru.practicum.ewmserver.entity.Event;
 import ru.practicum.ewmserver.entity.Location;
 import ru.practicum.ewmserver.entity.User;
+import ru.practicum.ewmserver.error.ForbiddenError;
 import ru.practicum.ewmserver.mapper.EventMapper;
 import ru.practicum.ewmserver.repository.CategoryRepository;
 import ru.practicum.ewmserver.repository.EventRepository;
@@ -20,6 +21,7 @@ import ru.practicum.ewmserver.repository.LocationRepository;
 import ru.practicum.ewmserver.repository.UserRepository;
 import ru.practicum.ewmserver.service.UsersService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -27,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
-//TODO
+    //TODO
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
@@ -45,6 +47,7 @@ public class UsersServiceImpl implements UsersService {
         User initiator = userRepository.getById(userId);
         Category category = categoryRepository.getById(newEventDto.getCategory());
         Event newEvent = eventMapper.toEntity(newEventDto, category, initiator);
+        checkNewEventDate(newEvent);
         log.info("newEvent after mapping from NewEventDto: {}", newEvent);
 
         Location location = locationRepository.save(newEvent.getLocation());
@@ -84,4 +87,13 @@ public class UsersServiceImpl implements UsersService {
     public ParticipationRequestDto rejectRequest(long userId, long eventId, long reqId) {
         return null;
     }
+
+    private void checkNewEventDate(Event newEvent) {
+        if (newEvent.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
+            throw new ForbiddenError(
+                    String.format("До события %s осталось меньше 2 часов!", newEvent.getTitle())
+            );
+        }
+    }
+
 }

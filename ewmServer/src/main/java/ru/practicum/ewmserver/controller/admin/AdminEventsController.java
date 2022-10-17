@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.admin.AdminEventsRequestParams;
 import ru.practicum.ewmserver.dto.admin.AdminUpdateEventRequest;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
+import ru.practicum.ewmserver.service.admin.AdminEventsService;
 
 import java.util.List;
 
@@ -13,32 +14,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminEventsController {
 
-//TODO
+    private final AdminEventsService adminEventsService;
 
     @GetMapping
     public List<EventFullDto> getAll(AdminEventsRequestParams requestParams) {
-        //TODO
-        return null;
+        return adminEventsService.getAll(requestParams);
     }
 
     @PutMapping("/{eventId}")
     public EventFullDto updateEvent(
             @PathVariable long eventId,
-            AdminUpdateEventRequest updateEventRequest
+            @RequestBody AdminUpdateEventRequest updateEventRequest
     ) {
-        //TODO
-        return null;
+        return adminEventsService.updateEvent(eventId, updateEventRequest);
     }
 
     @PatchMapping("/{eventId}/publish")
     public EventFullDto publishEvent(@PathVariable long eventId) {
-        //TODO
-        return null;
+        return adminEventsService.publishEvent(eventId);
     }
 
     @PatchMapping("/{eventId}/reject")
     public EventFullDto rejectEvent(@PathVariable long eventId) {
-        //TODO
-        return null;
+        return adminEventsService.rejectEvent(eventId);
     }
 }

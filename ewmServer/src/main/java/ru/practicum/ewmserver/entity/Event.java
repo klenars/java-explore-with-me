@@ -18,7 +18,9 @@ public class Event {
     private Long id;
     @ManyToOne
     private Category category;
+    @Column(length = 120)
     private String title;
+    @Column(length = 2000)
     private String annotation;
     private LocalDateTime eventDate;
     @ManyToOne
@@ -28,6 +30,7 @@ public class Event {
     private boolean paid;
     private int confirmedRequests;
     private LocalDateTime createdOn;
+    @Column(length = 7000)
     private String description;
     private int participantLimit;
     private LocalDateTime publishedOn;

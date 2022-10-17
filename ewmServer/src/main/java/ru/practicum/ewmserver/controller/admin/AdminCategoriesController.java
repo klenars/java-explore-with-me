@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
 import ru.practicum.ewmserver.dto.category.NewCategoryDto;
-import ru.practicum.ewmserver.service.AdminCategoriesService;
+import ru.practicum.ewmserver.service.admin.AdminCategoriesService;
 
 @RestController
 @RequestMapping("/admin/categories")

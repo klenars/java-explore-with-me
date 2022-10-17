@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.admin.NewUserRequest;
 import ru.practicum.ewmserver.dto.user.UserDto;
-import ru.practicum.ewmserver.service.AdminUserService;
+import ru.practicum.ewmserver.service.admin.AdminUserService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

@@ -16,9 +16,8 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleConflictError(final ConstraintViolationException exception) {
-        return new ApiError(exception, "Ошибка уникальности.", HttpStatus.CONFLICT);
+        return new ApiError(exception, "Запрос приводит к нарушению целостности данных.", HttpStatus.CONFLICT);
     }
-
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -36,5 +35,23 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleConstraintViolationException(final javax.validation.ConstraintViolationException exception) {
         return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleConflictError(final ConflictError exception) {
+        return new ApiError(exception, "Запрос приводит к нарушению целостности данных.", HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ApiError handleForbiddenError(final ForbiddenError exception) {
+        return new ApiError(exception, "Не выполнены условия для совершения операции.", HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ApiError handleForbiddenError(final RuntimeException exception) {
+        return new ApiError(exception, "Внутренняя ошибка сервера.", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

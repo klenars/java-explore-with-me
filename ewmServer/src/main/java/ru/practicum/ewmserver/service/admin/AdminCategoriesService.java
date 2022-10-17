@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service;
+package ru.practicum.ewmserver.service.admin;
 
 import ru.practicum.ewmserver.dto.category.CategoryDto;
 import ru.practicum.ewmserver.dto.category.NewCategoryDto;

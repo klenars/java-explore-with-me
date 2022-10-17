@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service.impl;
+package ru.practicum.ewmserver.service.admin.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import ru.practicum.ewmserver.dto.user.UserDto;
 import ru.practicum.ewmserver.entity.User;
 import ru.practicum.ewmserver.mapper.UserMapper;
 import ru.practicum.ewmserver.repository.UserRepository;
-import ru.practicum.ewmserver.service.AdminUserService;
+import ru.practicum.ewmserver.service.admin.AdminUserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
