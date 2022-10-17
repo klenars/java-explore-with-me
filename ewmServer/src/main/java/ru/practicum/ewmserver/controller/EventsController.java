@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventsController {
 
+    //TODO
     private final EventService eventService;
 
     @GetMapping
