@@ -6,6 +6,8 @@ import ru.practicum.ewmserver.dto.compilation.CompilationDto;
 import ru.practicum.ewmserver.dto.compilation.NewCompilationDto;
 import ru.practicum.ewmserver.service.admin.AdminCompilationsService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/admin/compilations")
 @RequiredArgsConstructor
@@ -14,7 +16,7 @@ public class AdminCompilationsController {
     private final AdminCompilationsService adminCompilationsService;
 
     @PostMapping
-    public CompilationDto createCompilation(@RequestBody NewCompilationDto newCompilationDto) {
+    public CompilationDto createCompilation(@RequestBody @Valid NewCompilationDto newCompilationDto) {
         return adminCompilationsService.createCompilation(newCompilationDto);
     }
 
