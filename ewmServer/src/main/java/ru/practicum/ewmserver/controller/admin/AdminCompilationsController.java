@@ -4,22 +4,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.compilation.CompilationDto;
 import ru.practicum.ewmserver.dto.compilation.NewCompilationDto;
+import ru.practicum.ewmserver.service.admin.AdminCompilationsService;
 
 @RestController
 @RequestMapping("/admin/compilations")
 @RequiredArgsConstructor
 public class AdminCompilationsController {
-    //TODO
+
+    private final AdminCompilationsService adminCompilationsService;
 
     @PostMapping
     public CompilationDto createCompilation(@RequestBody NewCompilationDto newCompilationDto) {
-        //TODO
-        return null;
+        return adminCompilationsService.createCompilation(newCompilationDto);
     }
 
     @DeleteMapping("/{compId}")
     public void deleteCompilation(@PathVariable long compId) {
-        //TODO
+        adminCompilationsService.deleteCompilation(compId);
     }
 
     @DeleteMapping("/{compId}/events/{eventId}")
