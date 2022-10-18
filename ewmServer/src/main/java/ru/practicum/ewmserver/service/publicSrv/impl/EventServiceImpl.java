@@ -1,10 +1,10 @@
-package ru.practicum.ewmserver.service.impl;
+package ru.practicum.ewmserver.service.publicSrv.impl;
 
 import org.springframework.stereotype.Service;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
 import ru.practicum.ewmserver.dto.event.EventsRequestParams;
-import ru.practicum.ewmserver.service.EventService;
+import ru.practicum.ewmserver.service.publicSrv.EventService;
 
 import java.util.List;
 

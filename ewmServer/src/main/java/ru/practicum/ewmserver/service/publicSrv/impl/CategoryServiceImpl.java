@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service.impl;
+package ru.practicum.ewmserver.service.publicSrv.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
 import ru.practicum.ewmserver.mapper.CategoryMapper;
 import ru.practicum.ewmserver.repository.CategoryRepository;
-import ru.practicum.ewmserver.service.CategoryService;
+import ru.practicum.ewmserver.service.publicSrv.CategoryService;
 
 import java.util.List;
 import java.util.stream.Collectors;

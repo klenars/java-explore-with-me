@@ -9,8 +9,10 @@ import ru.practicum.ewmserver.dto.event.EventShortDto;
 import ru.practicum.ewmserver.dto.event.NewEventDto;
 import ru.practicum.ewmserver.dto.event.UpdateEventRequest;
 import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
-import ru.practicum.ewmserver.service.UsersService;
+import ru.practicum.ewmserver.service.user.UsersService;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @Slf4j
@@ -25,8 +27,8 @@ public class UsersEventsController {
     @GetMapping
     public List<EventShortDto> getAll(
             @PathVariable long userId,
-            @RequestParam int from,
-            @RequestParam int size
+            @PositiveOrZero @RequestParam int from,
+            @Positive @RequestParam int size
     ) {
         return usersService.getAll(userId, from, size);
     }

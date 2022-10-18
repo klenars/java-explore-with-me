@@ -1,28 +1,32 @@
 package ru.practicum.ewmserver.controller.userPrivat;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
+import ru.practicum.ewmserver.service.user.UserRequestsService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users/{userId}/requests")
+@RequiredArgsConstructor
 public class UserRequestsController {
-    //TODO
+
+    private final UserRequestsService userRequestsService;
 
     @GetMapping
     public List<ParticipationRequestDto> getAll(@PathVariable long userId) {
-        //TODO
-        return null;
+        return userRequestsService.getAll(userId);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ParticipationRequestDto createRequest(
             @PathVariable long userId,
             @RequestParam long eventId
     ) {
-        //TODO
-        return null;
+        return userRequestsService.createRequest(userId, eventId);
     }
 
     @PatchMapping("/{requestId}/cancel")
@@ -30,7 +34,6 @@ public class UserRequestsController {
             @PathVariable long userId,
             @PathVariable long requestId
     ) {
-        //TODO
-        return null;
+        return userRequestsService.cancelRequest(userId, requestId);
     }
 }

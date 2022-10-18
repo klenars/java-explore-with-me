@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service;
+package ru.practicum.ewmserver.service.user;
 
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;

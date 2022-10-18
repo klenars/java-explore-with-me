@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class UpdateEventRequest {
     private String annotation;
-    private long category;
+    private Long category;
     private String description;
     private String eventDate;
     @NotNull
     private Long eventId;
-    private boolean paid;
-    private int participantLimit;
+    private Boolean paid;
+    private Integer participantLimit;
     private String title;
 }

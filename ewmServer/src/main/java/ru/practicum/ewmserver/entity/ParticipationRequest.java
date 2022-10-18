@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "participation_requests")
+@Entity(name = "requests")
 @Getter
 @Setter
 public class ParticipationRequest {
@@ -23,5 +23,5 @@ public class ParticipationRequest {
     @ManyToOne
     private User requester;
 
-    private EventState status;
+    private RequestStatus status;
 }

@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service;
+package ru.practicum.ewmserver.service.publicSrv;
 
 import ru.practicum.ewmserver.dto.compilation.CompilationDto;
 

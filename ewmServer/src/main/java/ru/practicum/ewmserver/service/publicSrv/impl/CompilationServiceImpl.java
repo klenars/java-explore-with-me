@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.service.impl;
+package ru.practicum.ewmserver.service.publicSrv.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -8,7 +8,7 @@ import ru.practicum.ewmserver.dto.compilation.CompilationDto;
 import ru.practicum.ewmserver.entity.Compilation;
 import ru.practicum.ewmserver.mapper.CompilationMapper;
 import ru.practicum.ewmserver.repository.CompilationRepository;
-import ru.practicum.ewmserver.service.CompilationService;
+import ru.practicum.ewmserver.service.publicSrv.CompilationService;
 
 import java.util.List;
 import java.util.stream.Collectors;

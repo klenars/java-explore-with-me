@@ -1,5 +1,7 @@
 package ru.practicum.ewmserver.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +21,9 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
 
     @Query("select e from events e where e.id in ?1")
     List<Event> getEventsByIds(Collection<Long> ids);
+
+    @Query("select e from events e where e.initiator.id = ?1")
+    Page<Event> findByInitiatorId(Long id, Pageable pageable);
 
 
 
