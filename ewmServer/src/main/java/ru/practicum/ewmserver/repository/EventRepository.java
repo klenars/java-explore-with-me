@@ -25,8 +25,6 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     @Query("select e from events e where e.initiator.id = ?1")
     Page<Event> findByInitiatorId(Long id, Pageable pageable);
 
-
-
     @Query("select (count(e) > 0) from events e where e.category.id = ?1")
     boolean areEventsWithCategory(Long catId);
 }
