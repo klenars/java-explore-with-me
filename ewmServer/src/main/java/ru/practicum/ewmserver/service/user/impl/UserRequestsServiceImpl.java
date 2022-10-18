@@ -101,7 +101,7 @@ public class UserRequestsServiceImpl implements UserRequestsService {
             );
         }
 
-        if (requestRepository.quantityEventRequests(event.getId(), RequestStatus.CANCELED) == event.getParticipantLimit()) {
+        if (requestRepository.quantityEventRequests(event.getId(), List.of(RequestStatus.PENDING, RequestStatus.CONFIRMED)) == event.getParticipantLimit()) {
             throw new ForbiddenError(
                     String.format(
                             "У события id=%d достигнут максимальный лимит запросов на участние",

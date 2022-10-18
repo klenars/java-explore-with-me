@@ -13,10 +13,8 @@ import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
 import ru.practicum.ewmserver.entity.*;
 import ru.practicum.ewmserver.error.ForbiddenError;
 import ru.practicum.ewmserver.mapper.EventMapper;
-import ru.practicum.ewmserver.repository.CategoryRepository;
-import ru.practicum.ewmserver.repository.EventRepository;
-import ru.practicum.ewmserver.repository.LocationRepository;
-import ru.practicum.ewmserver.repository.UserRepository;
+import ru.practicum.ewmserver.mapper.ParticipationRequestMapper;
+import ru.practicum.ewmserver.repository.*;
 import ru.practicum.ewmserver.service.user.UsersService;
 
 import java.time.LocalDateTime;
@@ -30,12 +28,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
-    //TODO
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
+    private final RequestRepository requestRepository;
+    private final ParticipationRequestMapper requestMapper;
 
     @Override
     public List<EventShortDto> getAll(long userId, int from, int size) {
@@ -96,23 +95,67 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public List<ParticipationRequestDto> getRequests(long userId, long eventId) {
-        return null;
+        User user = userRepository.getById(userId);
+        Event event = eventRepository.getEventById(eventId);
+        checkEventInitiator(user, event);
+
+        return requestRepository.getAllByEventId(eventId).stream()
+                .map(requestMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto confirmRequest(long userId, long eventId, long reqId) {
-        return null;
+        User user = userRepository.getById(userId);
+        Event event = eventRepository.getEventById(eventId);
+        checkEventInitiator(user, event);
+        ParticipationRequest request = requestRepository.getById(reqId);
+        if (event.getParticipantLimit() == 0 || !event.isRequestModeration()) {
+            return requestMapper.toDto(request);
+        }
+        checkRequestLimit(event);
+
+        request.setStatus(RequestStatus.CONFIRMED);
+
+        if (requestRepository.quantityEventRequests(event.getId(), List.of(RequestStatus.CONFIRMED)) == event.getParticipantLimit()) {
+            requestRepository.getAllByEventIdAndStatus(eventId, RequestStatus.PENDING)
+                    .forEach(r -> r.setStatus(RequestStatus.CANCELED));
+        }
+
+        return requestMapper.toDto(request);
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto rejectRequest(long userId, long eventId, long reqId) {
-        return null;
+        User user = userRepository.getById(userId);
+        Event event = eventRepository.getEventById(eventId);
+        checkEventInitiator(user, event);
+        ParticipationRequest request = requestRepository.getById(reqId);
+
+        request.setStatus(RequestStatus.CANCELED);
+
+        //TODO нужно ли пересчитывать колличество подтвержденных заявок в событии?
+
+        return requestMapper.toDto(request);
+    }
+
+    private void checkRequestLimit(Event event) {
+        if (requestRepository.quantityEventRequests(event.getId(), List.of(RequestStatus.CONFIRMED)) == event.getParticipantLimit()) {
+            throw new ForbiddenError(
+                    String.format(
+                            "У события id=%d достигнут максимальный лимит участников",
+                            event.getId()
+                    )
+            );
+        }
     }
 
     private void checkEventInitiator(User user, Event event) {
         if (!Objects.equals(user.getId(), event.getInitiator().getId())) {
             throw new ForbiddenError(
-                    String.format("Юзер id=%d не является инициаторм события id=%d", user.getId(), event.getId())
+                    String.format("Юзер id=%d не является инициатором события id=%d", user.getId(), event.getId())
             );
         }
     }
