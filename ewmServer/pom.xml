@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.4</version>
+        <groupId>ru.practicum</groupId>
+        <artifactId>explore-with-me</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.practicum</groupId>
+
     <artifactId>ewmServer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ewmServer</name>
@@ -19,6 +19,13 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>ru.practicum</groupId>
+            <artifactId>client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
