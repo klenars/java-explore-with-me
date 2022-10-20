@@ -112,11 +112,14 @@ public class UsersServiceImpl implements UsersService {
         checkEventInitiator(user, event);
         ParticipationRequest request = requestRepository.getById(reqId);
         if (event.getParticipantLimit() == 0 || !event.isRequestModeration()) {
+            request.setStatus(RequestStatus.CONFIRMED);
             return requestMapper.toDto(request);
         }
         checkRequestLimit(event);
 
         request.setStatus(RequestStatus.CONFIRMED);
+
+        event.setConfirmedRequests(event.getConfirmedRequests() + 1);
 
         if (requestRepository.quantityEventRequests(event.getId(), List.of(RequestStatus.CONFIRMED)) == event.getParticipantLimit()) {
             requestRepository.getAllByEventIdAndStatus(eventId, RequestStatus.PENDING)
@@ -134,9 +137,11 @@ public class UsersServiceImpl implements UsersService {
         checkEventInitiator(user, event);
         ParticipationRequest request = requestRepository.getById(reqId);
 
-        request.setStatus(RequestStatus.CANCELED);
+        if (request.getStatus().equals(RequestStatus.CONFIRMED)) {
+            event.setConfirmedRequests(event.getConfirmedRequests() - 1);
+        }
 
-        //TODO нужно ли пересчитывать колличество подтвержденных заявок в событии?
+        request.setStatus(RequestStatus.CANCELED);
 
         return requestMapper.toDto(request);
     }

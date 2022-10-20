@@ -6,7 +6,6 @@
         <groupId>ru.practicum</groupId>
         <artifactId>explore-with-me</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>ewmStat</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -16,13 +15,6 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
-
-        <dependency>
-            <groupId>ru.practicum</groupId>
-            <artifactId>client</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

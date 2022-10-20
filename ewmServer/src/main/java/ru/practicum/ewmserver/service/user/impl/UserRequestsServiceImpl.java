@@ -42,9 +42,12 @@ public class UserRequestsServiceImpl implements UserRequestsService {
         ParticipationRequest request = requestRepository.getById(requestId);
         userRepository.getById(userId);
 
-        request.setStatus(RequestStatus.CANCELED);
+        if (request.getStatus().equals(RequestStatus.CONFIRMED)) {
+            Event event = eventRepository.getEventById(request.getEvent().getId());
+            event.setConfirmedRequests(event.getConfirmedRequests() - 1);
+        }
 
-        //TODO нужно ли пересчитывать колличество подтвержденных заявок в событии?
+        request.setStatus(RequestStatus.CANCELED);
 
         return requestMapper.toDto(request);
     }

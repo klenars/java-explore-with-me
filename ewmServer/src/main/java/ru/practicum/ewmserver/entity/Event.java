@@ -36,7 +36,7 @@ public class Event {
     private LocalDateTime publishedOn;
     private boolean requestModeration;
     private EventState state;
-    private int views;
+    private long views;
 
     public Event() {
         this.createdOn = LocalDateTime.now();

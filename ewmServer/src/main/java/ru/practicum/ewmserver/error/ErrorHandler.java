@@ -48,10 +48,4 @@ public class ErrorHandler {
     public ApiError handleForbiddenError(final ForbiddenError exception) {
         return new ApiError(exception, "Не выполнены условия для совершения операции.", HttpStatus.FORBIDDEN);
     }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiError handleForbiddenError(final RuntimeException exception) {
-        return new ApiError(exception, "Внутренняя ошибка сервера.", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 }

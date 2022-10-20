@@ -25,7 +25,6 @@
 	<modules>
 		<module>ewmStat</module>
 		<module>ewmServer</module>
-		<module>client</module>
 	</modules>
 
 	<build>

@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.ewmserver.client.StatClient;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
 import ru.practicum.ewmserver.dto.event.EventsRequestParams;
 import ru.practicum.ewmserver.service.publicSrv.EventService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -20,15 +22,26 @@ import java.util.List;
 public class EventsController {
 
     private final EventService eventService;
+    private final StatClient client;
 
     @GetMapping
-    public List<EventShortDto> getAllEvents(EventsRequestParams params) {
+    public List<EventShortDto> getAllEvents(
+            EventsRequestParams params,
+            HttpServletRequest request
+    ) {
         log.info("GET with params: {}", params);
-        return eventService.getAllEvents(params);
+        List<EventShortDto> dtoList = eventService.getAllEvents(params);
+        client.postHit(request);
+        return dtoList;
     }
 
     @GetMapping("/{id}")
-    public EventFullDto getEventById(@PathVariable long id) {
-        return eventService.getEventById(id);
+    public EventFullDto getEventById(
+            @PathVariable long id,
+            HttpServletRequest request
+    ) {
+        EventFullDto response = eventService.getEventById(id);
+        client.postHit(request);
+        return response;
     }
 }

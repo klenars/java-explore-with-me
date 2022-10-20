@@ -2,6 +2,7 @@ package ru.practicum.ewmserver.service.publicSrv.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
 import ru.practicum.ewmserver.dto.event.EventsRequestParams;
@@ -23,11 +24,11 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
 
     @Override
+    @Transactional
     public EventFullDto getEventById(long id) {
         Event event = eventRepository.getEventById(id);
         checkEventStatus(event);
-
-        //TODO добавить запрос на увеличение числа просмотров
+        event.setViews(event.getViews() + 1);
 
         return eventMapper.toFullDto(event);
     }
