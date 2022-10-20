@@ -18,6 +18,7 @@ public class StatServiceImpl implements StatService {
 
     @Override
     public List<ViewStats> getStats(StatsRequestParams params) {
+        List<EndpointHit> hits = repository.findAll(params.toSpecification());
         return null;
     }
 }

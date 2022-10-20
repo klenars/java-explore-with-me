@@ -22,4 +22,8 @@ public class StatsRequestParams {
     public void setEnd(String end) {
         this.end = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
+
+    public StatsRequestSpecification toSpecification() {
+        return new StatsRequestSpecification(this);
+    }
 }
