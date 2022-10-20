@@ -12,10 +12,9 @@ public interface UserMapper {
 
     @Named("toDto")
     UserDto toDto(User user);
+
     @Named("toShortDto")
     UserShortDto toShortDto(User user);
 
     User toEntity(NewUserRequest newUserRequest);
-    User dtoToUser (UserDto userDto);
-    User shortDtoToUser(UserShortDto userShortDto);
 }
