@@ -141,7 +141,7 @@ public class UsersServiceImpl implements UsersService {
             event.setConfirmedRequests(event.getConfirmedRequests() - 1);
         }
 
-        request.setStatus(RequestStatus.CANCELED);
+        request.setStatus(RequestStatus.REJECTED);
 
         return requestMapper.toDto(request);
     }
