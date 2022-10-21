@@ -9,7 +9,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatController {
 
-    //TODO
     private final StatService statService;
 
     @PostMapping("/hit")

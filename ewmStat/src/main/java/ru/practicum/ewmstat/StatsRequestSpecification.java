@@ -35,10 +35,6 @@ public class StatsRequestSpecification implements Specification<EndpointHit> {
             predicates.add(root.get("uri").in(uris));
         }
 
-        if (params.isUnique()) {
-            query.select(root.get("ip")).distinct(true);
-        }
-
         return cb.and(predicates.toArray(new Predicate[0]));
     }
 }

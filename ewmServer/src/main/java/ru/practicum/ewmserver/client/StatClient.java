@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.client;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +14,9 @@ import java.util.List;
 public class StatClient {
 
     private final RestTemplate restTemplate;
+
+    @Value("${ewmstat.url}")
+    private String statUrl;
 
     public StatClient() {
         this.restTemplate = new RestTemplate();
@@ -30,7 +34,7 @@ public class StatClient {
 
     private void makeAndSendRequest(EndpointHitDto body) {
         HttpEntity<EndpointHitDto> requestEntity = new HttpEntity<>(body, defaultHeaders());
-        restTemplate.exchange("http://localhost:9090/hit", HttpMethod.POST, requestEntity, Object.class);
+        restTemplate.exchange(statUrl, HttpMethod.POST, requestEntity, Object.class);
     }
 
     private HttpHeaders defaultHeaders() {
