@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.client;
+package ru.practicum.ewmserver.service.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

@@ -1,7 +1,8 @@
-package ru.practicum.ewmstat;
+package ru.practicum.ewmstat.specification;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import ru.practicum.ewmstat.entity.EndpointHit;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

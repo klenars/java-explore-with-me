@@ -1,7 +1,12 @@
-package ru.practicum.ewmstat;
+package ru.practicum.ewmstat.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewmstat.entity.EndpointHit;
+import ru.practicum.ewmstat.repository.StatRepository;
+import ru.practicum.ewmstat.specification.StatsRequestParams;
+import ru.practicum.ewmstat.entity.ViewStats;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +27,7 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
-    public List<ViewStats> getStats(StatsRequestParams params) {
+    public List<ViewStats> getStats(@NonNull StatsRequestParams params) {
         List<EndpointHit> hits = repository.findAll(params.toSpecification());
         List<ViewStats> viewStats = hits.stream()
                 .filter(distinctByKey(EndpointHit::getUri))

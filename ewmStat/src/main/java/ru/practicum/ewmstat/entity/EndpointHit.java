@@ -1,4 +1,4 @@
-package ru.practicum.ewmstat;
+package ru.practicum.ewmstat.entity;
 
 import lombok.Getter;
 import lombok.Setter;
