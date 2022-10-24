@@ -12,9 +12,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс спецификации для фильтрации данных статистики из БД
+ */
 @AllArgsConstructor
 public class StatsRequestSpecification implements Specification<EndpointHit> {
 
+    /**Параметры запроса {@link StatsRequestParams}*/
     private StatsRequestParams params;
 
     @Override
