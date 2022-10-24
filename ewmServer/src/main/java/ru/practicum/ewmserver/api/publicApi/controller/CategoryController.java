@@ -10,14 +10,26 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
+/**
+ * Публичный API для работы с категориями, содержит поле:
+ * {@link CategoryService}
+ */
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
 @Validated
 public class CategoryController {
 
+    /**Поле сервиса обработки запросов по категориям публичного апи*/
     private final CategoryService categoryService;
 
+
+    /**
+     * Получение категорий
+     * @param from количество категорий, которые нужно пропустить для формирования текущего набора
+     * @param size количество категорий в наборе
+     * @return List of {@link CategoryDto}
+     */
     @GetMapping
     public List<CategoryDto> getAll(
             @PositiveOrZero @RequestParam(defaultValue = "0") int from,
@@ -26,6 +38,11 @@ public class CategoryController {
         return categoryService.getAll(from, size);
     }
 
+    /**
+     * Получение информации о категории по её идентификатору
+     * @param catId id категории
+     * @return {@link CategoryDto}
+     */
     @GetMapping("/{catId}")
     public CategoryDto getById(@PathVariable long catId) {
         return categoryService.getById(catId);

@@ -15,15 +15,29 @@ import ru.practicum.ewmserver.service.publicSrv.EventService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Публичный API для работы с событиями, имеет поля
+ * {@link EventService},
+ * {@link StatClient}
+ */
 @Slf4j
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
 public class EventsController {
 
+    /**Сервис для обработки публичных запросов по событиям*/
     private final EventService eventService;
+
+    /**Сервис-клиент для отправки данных статистики по обращению к эндпоинтам*/
     private final StatClient client;
 
+    /**
+     * Получение событий с возможностью фильтрации
+     * @param params {@link EventsRequestParams}
+     * @param request {@link HttpServletRequest}
+     * @return List of {@link EventShortDto}
+     */
     @GetMapping
     public List<EventShortDto> getAllEvents(
             EventsRequestParams params,
@@ -35,6 +49,12 @@ public class EventsController {
         return dtoList;
     }
 
+    /**
+     * Получение подробной информации об опубликованном событии по его идентификатору
+     * @param id id события
+     * @param request {@link HttpServletRequest}
+     * @return {@link EventFullDto}
+     */
     @GetMapping("/{id}")
     public EventFullDto getEventById(
             @PathVariable long id,

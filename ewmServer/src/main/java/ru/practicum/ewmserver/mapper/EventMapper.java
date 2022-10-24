@@ -13,19 +13,39 @@ import ru.practicum.ewmserver.entity.User;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Маппер Событий
+ */
 @Mapper(uses = {CategoryMapper.class, LocationMapper.class, UserMapper.class})
 public interface EventMapper {
 
+    /**
+     * Маппер Event в EventFullDto
+     * @param event {@link Event}
+     * @return {@link EventFullDto}
+     */
     @Mapping(target = "category", qualifiedByName = "toDto")
     @Mapping(target = "initiator", qualifiedByName = "toShortDto")
     @Mapping(target = "location", qualifiedByName = "toDto")
     EventFullDto toFullDto(Event event);
 
+    /**
+     * Маппер Event в EventShortDto
+     * @param event {@link Event}
+     * @return {@link EventShortDto}
+     */
     @Named("toShortDto")
     @Mapping(target = "category", qualifiedByName = "toDto")
     @Mapping(target = "initiator", qualifiedByName = "toShortDto")
     EventShortDto toShortDto(Event event);
 
+    /**
+     * Маппер NewEventDto в Event
+     * @param newEventDto {@link NewEventDto}
+     * @param category {@link Category}
+     * @param initiator {@link User}
+     * @return {@link Event}
+     */
     @Mapping(target = "eventDate", expression = "java( parseDate(newEventDto.getEventDate()) )")
     @Mapping(target = "location", qualifiedByName = "toEntity")
     @Mapping(target = "category", expression = "java( category )")

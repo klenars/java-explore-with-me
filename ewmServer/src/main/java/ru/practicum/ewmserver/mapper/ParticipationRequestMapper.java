@@ -6,9 +6,17 @@ import org.mapstruct.Named;
 import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
 import ru.practicum.ewmserver.entity.ParticipationRequest;
 
+/**
+ * Маппер Запросов на участие в событиях
+ */
 @Mapper
 public interface ParticipationRequestMapper {
 
+    /**
+     * Маппер ParticipationRequest в ParticipationRequestDto
+     * @param participationRequest {@link ParticipationRequest}
+     * @return {@link ParticipationRequestDto}
+     */
     @Named("toDto")
     @Mapping(target = "event", source = "event.id")
     @Mapping(target = "requester", source = "requester.id")
