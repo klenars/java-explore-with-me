@@ -15,9 +15,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Спецификация для филбтрации Событий на публичный запрос, имеет поле:
+ * {@link EventsRequestSpecification#params}
+ */
 @AllArgsConstructor
 public class EventsRequestSpecification implements Specification<Event> {
 
+    /**Параметры запроса для фильтрации событий {@link EventsRequestParams}*/
     private EventsRequestParams params;
 
     @Override

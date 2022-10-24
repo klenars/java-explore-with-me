@@ -14,12 +14,20 @@ import ru.practicum.ewmserver.service.admin.AdminUserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link AdminUserService}, имеет поля:
+ * {@link AdminUserServiceImpl#userRepository},
+ * {@link AdminUserServiceImpl#userMapper}
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminUserServiceImpl implements AdminUserService {
 
+    /**Репозиторий Юзеров {@link UserRepository}*/
     private final UserRepository userRepository;
+
+    /**Маппер Юзеров {@link UserMapper}*/
     private final UserMapper userMapper;
 
     @Override

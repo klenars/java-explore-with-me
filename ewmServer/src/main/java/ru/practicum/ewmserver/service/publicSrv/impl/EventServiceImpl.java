@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.service.publicSrv.impl;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,11 +17,19 @@ import ru.practicum.ewmserver.service.publicSrv.EventService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link EventService}, имеет поля:
+ * {@link EventServiceImpl#eventRepository},
+ * {@link EventServiceImpl#eventMapper},
+ */
 @Service
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
+    /**Репозиторий событий {@link EventRepository}*/
     private final EventRepository eventRepository;
+
+    /**Маппер событий {@link EventMapper}*/
     private final EventMapper eventMapper;
 
     @Override
@@ -34,13 +43,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventShortDto> getAllEvents(EventsRequestParams params) {
+    public List<EventShortDto> getAllEvents(@NonNull EventsRequestParams params) {
         return eventRepository.findAll(params.toSpecification(), params.toPageable()).stream()
                 .map(eventMapper::toShortDto)
                 .collect(Collectors.toList());
     }
 
-    private void checkEventStatus(Event event) {
+    /**
+     * Проверка статуса события перед получением
+     * @param event {@link Event}
+     * @throws ForbiddenError
+     */
+    private void checkEventStatus(@NonNull Event event) {
         if (!event.getState().equals(EventState.PUBLISHED)) {
             throw new ForbiddenError(
                     String.format("Событие id=%d не опубликовано", event.getId())

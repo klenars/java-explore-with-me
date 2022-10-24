@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.service.user.impl;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +18,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link UserRequestsService}, имеет поля:
+ * {@link UserRequestsServiceImpl#requestRepository},
+ * {@link UserRequestsServiceImpl#userRepository},
+ * {@link UserRequestsServiceImpl#eventRepository},
+ * {@link UserRequestsServiceImpl#requestMapper},
+ */
 @Service
 @RequiredArgsConstructor
 public class UserRequestsServiceImpl implements UserRequestsService {
 
+    /**Репозиторий запросов на участие {@link RequestRepository}*/
     private final RequestRepository requestRepository;
+
+    /**Репозиторий юзеров на участие {@link UserRepository}*/
     private final UserRepository userRepository;
+
+    /**Репозиторий событий на участие {@link EventRepository}*/
     private final EventRepository eventRepository;
+
+    /**Маппер запросов на участие {@link ParticipationRequestMapper}*/
     private final ParticipationRequestMapper requestMapper;
 
     @Override
@@ -60,7 +75,13 @@ public class UserRequestsServiceImpl implements UserRequestsService {
                 .collect(Collectors.toList());
     }
 
-    private ParticipationRequest getNewRequest(User user, Event event) {
+    /**
+     * Создание экземпляра заероса на участие
+     * @param user {@link User}
+     * @param event {@link Event}
+     * @return {@link ParticipationRequest}
+     */
+    private ParticipationRequest getNewRequest(@NonNull User user, @NonNull Event event) {
         ParticipationRequest request = new ParticipationRequest();
         request.setEvent(event);
         request.setCreated(LocalDateTime.now());
@@ -74,7 +95,13 @@ public class UserRequestsServiceImpl implements UserRequestsService {
         return request;
     }
 
-    private void checkDataForNewRequest(User user, Event event) {
+    /**
+     * Проверка данных для создания нового запроса
+     * @param user {@link User}
+     * @param event {@link Event}
+     * @throws ForbiddenError
+     */
+    private void checkDataForNewRequest(@NonNull User user, @NonNull Event event) {
         if (requestRepository.requestAlreadyExist(event.getId(), user.getId())) {
             throw new ForbiddenError(
                     String.format(

@@ -14,9 +14,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Спецификация для филбтрации Событий на запрос админа, имеет поле:
+ * {@link AdminEventsRequestSpecification#params}
+ */
 @AllArgsConstructor
 public class AdminEventsRequestSpecification implements Specification<Event> {
 
+    /**Параметры запроса для фильтрации событий {@link AdminEventsRequestParams}*/
     private AdminEventsRequestParams params;
 
     @Override

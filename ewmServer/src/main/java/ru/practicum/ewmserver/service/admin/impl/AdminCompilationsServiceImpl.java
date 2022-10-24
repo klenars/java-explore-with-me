@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.service.admin.impl;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,16 +15,27 @@ import ru.practicum.ewmserver.service.admin.AdminCompilationsService;
 
 import java.util.List;
 
+/**
+ * Реализация интерфейса {@link AdminCompilationsService}, содержит поля:
+ * {@link AdminCompilationsServiceImpl#compilationRepository},
+ * {@link AdminCompilationsServiceImpl#compilationMapper},
+ * {@link AdminCompilationsServiceImpl#eventRepository}
+ */
 @Service
 @RequiredArgsConstructor
 public class AdminCompilationsServiceImpl implements AdminCompilationsService {
 
+    /**Репозиторий подборок {@link CompilationRepository}*/
     private final CompilationRepository compilationRepository;
+
+    /**Маппер подборок {@link CompilationMapper}*/
     private final CompilationMapper compilationMapper;
+
+    /**Репозиторий событий {@link EventRepository}*/
     private final EventRepository eventRepository;
 
     @Override
-    public CompilationDto createCompilation(NewCompilationDto newCompilationDto) {
+    public CompilationDto createCompilation(@NonNull NewCompilationDto newCompilationDto) {
         Compilation compilation = compilationMapper.toEntity(newCompilationDto);
         List<Event> events = eventRepository.getEventsByIds(newCompilationDto.getEvents());
         compilation.setEvents(events);

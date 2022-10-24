@@ -13,11 +13,19 @@ import ru.practicum.ewmserver.service.publicSrv.CompilationService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link CompilationService}, имеет поля:
+ * {@link CompilationServiceImpl#compilationRepository},
+ * {@link CompilationServiceImpl#compilationMapper},
+ */
 @Service
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
 
+    /**Репозиторий подборок {@link CompilationRepository}*/
     private final CompilationRepository compilationRepository;
+
+    /**Маппер подборок {@link CompilationMapper}*/
     private final CompilationMapper compilationMapper;
 
     @Override

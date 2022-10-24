@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.service.admin.impl;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,18 +25,32 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link AdminEventsService}, имеет поля:
+ * {@link AdminEventsServiceImpl#eventRepository},
+ * {@link AdminEventsServiceImpl#eventMapper},
+ * {@link AdminEventsServiceImpl#categoryRepository},
+ * {@link AdminEventsServiceImpl#locationRepository},
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminEventsServiceImpl implements AdminEventsService {
 
+    /**Репозиторий событий {@link EventRepository}*/
     private final EventRepository eventRepository;
+
+    /**Маппер событий {@link EventMapper}*/
     private final EventMapper eventMapper;
+
+    /**Репозиторий категорий {@link CategoryRepository}*/
     private final CategoryRepository categoryRepository;
+
+    /**Репозиторий локаций {@link LocationRepository}*/
     private final LocationRepository locationRepository;
 
     @Override
-    public List<EventFullDto> getAll(AdminEventsRequestParams requestParams) {
+    public List<EventFullDto> getAll(@NonNull AdminEventsRequestParams requestParams) {
         return eventRepository.findAll(requestParams.toSpecification(), requestParams.toPageable())
                 .stream()
                 .map(eventMapper::toFullDto)
@@ -65,7 +80,7 @@ public class AdminEventsServiceImpl implements AdminEventsService {
 
     @Override
     @Transactional
-    public EventFullDto updateEvent(long eventId, AdminUpdateEventRequest updateEventRequest) {
+    public EventFullDto updateEvent(long eventId, @NonNull AdminUpdateEventRequest updateEventRequest) {
         log.info("get AdminUpdateEventRequest: {}", updateEventRequest);
         Event event = eventRepository.getEventById(eventId);
         log.info("event from bd: {}", event);
@@ -75,7 +90,12 @@ public class AdminEventsServiceImpl implements AdminEventsService {
         return eventMapper.toFullDto(event);
     }
 
-    private void updateEventFields(Event event, AdminUpdateEventRequest updateEventRequest) {
+    /**
+     * Обновление полей события
+     * @param event {@link Event}
+     * @param updateEventRequest {@link AdminUpdateEventRequest}
+     */
+    private void updateEventFields(@NonNull Event event, @NonNull AdminUpdateEventRequest updateEventRequest) {
         String annotation = updateEventRequest.getAnnotation();
         if (annotation != null) {
             event.setAnnotation(annotation);
@@ -125,7 +145,12 @@ public class AdminEventsServiceImpl implements AdminEventsService {
         }
     }
 
-    private void checkEventForReject(Event event) {
+    /**
+     * Проверка статуса события перед удалением
+     * @param event {@link Event}
+     * @throws ForbiddenError
+     */
+    private void checkEventForReject(@NonNull Event event) {
         if (event.getState().equals(EventState.PUBLISHED)) {
             throw new ForbiddenError(
                     String.format("Событие id=%d (%s) уже опубликовано!", event.getId(), event.getTitle())
@@ -133,6 +158,11 @@ public class AdminEventsServiceImpl implements AdminEventsService {
         }
     }
 
+    /**
+     * Проверка события перед публикацией
+     * @param event {@link Event}
+     * @throws ForbiddenError
+     */
     private void checkEventForPublish(Event event) {
         if (event.getEventDate().isBefore(LocalDateTime.now().plusHours(1))) {
             throw new ForbiddenError(

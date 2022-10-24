@@ -1,5 +1,6 @@
 package ru.practicum.ewmserver.service.user.impl;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -23,17 +24,40 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link UsersService}, имеет поля:
+ * {@link UsersServiceImpl#eventRepository},
+ * {@link UsersServiceImpl#eventMapper},
+ * {@link UsersServiceImpl#userRepository},
+ * {@link UsersServiceImpl#categoryRepository},
+ * {@link UsersServiceImpl#locationRepository},
+ * {@link UsersServiceImpl#requestRepository},
+ * {@link UsersServiceImpl#requestMapper},
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
+    /**Репозиторий Событий {@link EventRepository}*/
     private final EventRepository eventRepository;
+
+    /**Маппер Событий {@link EventMapper}*/
     private final EventMapper eventMapper;
+
+    /**Репозиторий Юзеров {@link UserRepository}*/
     private final UserRepository userRepository;
+
+    /**Репозиторий Категорий {@link CategoryRepository}*/
     private final CategoryRepository categoryRepository;
+
+    /**Репозиторий Локаций {@link LocationRepository}*/
     private final LocationRepository locationRepository;
+
+    /**Репозиторий Запросов на участие {@link RequestRepository}*/
     private final RequestRepository requestRepository;
+
+    /**Маппер Запросов на участие {@link ParticipationRequestMapper}*/
     private final ParticipationRequestMapper requestMapper;
 
     @Override
@@ -46,7 +70,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public EventFullDto createEvent(long userId, NewEventDto newEventDto) {
+    public EventFullDto createEvent(long userId, @NonNull NewEventDto newEventDto) {
         User initiator = userRepository.getById(userId);
         Category category = categoryRepository.getById(newEventDto.getCategory());
         Event newEvent = eventMapper.toEntity(newEventDto, category, initiator);
@@ -63,7 +87,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public EventFullDto updateEvent(long userId, UpdateEventRequest updateEventRequest) {
+    public EventFullDto updateEvent(long userId, @NonNull UpdateEventRequest updateEventRequest) {
         Event eventForUpdate = eventRepository.getEventById(updateEventRequest.getEventId());
         checkEventState(eventForUpdate);
         updateEventFields(eventForUpdate, updateEventRequest);
@@ -146,7 +170,11 @@ public class UsersServiceImpl implements UsersService {
         return requestMapper.toDto(request);
     }
 
-    private void checkRequestLimit(Event event) {
+    /**
+     * Проверка лимита участников в событии
+     * @param event {@link Event}
+     */
+    private void checkRequestLimit(@NonNull Event event) {
         if (requestRepository.quantityEventRequests(event.getId(), List.of(RequestStatus.CONFIRMED)) == event.getParticipantLimit()) {
             throw new ForbiddenError(
                     String.format(
@@ -157,7 +185,12 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    private void checkEventInitiator(User user, Event event) {
+    /**
+     * Проверка инициатора события
+     * @param user {@link User}
+     * @param event {@link Event}
+     */
+    private void checkEventInitiator(@NonNull User user, @NonNull Event event) {
         if (!Objects.equals(user.getId(), event.getInitiator().getId())) {
             throw new ForbiddenError(
                     String.format("Юзер id=%d не является инициатором события id=%d", user.getId(), event.getId())
@@ -165,7 +198,11 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    private void checkNewEventDate(Event newEvent) {
+    /**
+     * Проверка даты нового события
+     * @param newEvent {@link Event}
+     */
+    private void checkNewEventDate(@NonNull Event newEvent) {
         if (newEvent.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
             throw new ForbiddenError(
                     String.format("До события %s осталось меньше 2 часов!", newEvent.getTitle())
@@ -173,7 +210,11 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    private void checkEventState(Event event) {
+    /**
+     * Проверка статуса события
+     * @param event {@link Event}
+     */
+    private void checkEventState(@NonNull Event event) {
         if (event.getState().equals(EventState.PUBLISHED)) {
             throw new ForbiddenError(
                     String.format("Событие %s уже опубликовано!", event.getTitle())
@@ -181,7 +222,12 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    private void updateEventFields(Event event, UpdateEventRequest updateEventRequest) {
+    /**
+     * Обновление полей события
+     * @param event {@link Event}
+     * @param updateEventRequest {@link UpdateEventRequest}
+     */
+    private void updateEventFields(@NonNull Event event, @NonNull UpdateEventRequest updateEventRequest) {
 
         event.setState(EventState.PENDING);
 

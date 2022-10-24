@@ -11,11 +11,19 @@ import ru.practicum.ewmserver.service.publicSrv.CategoryService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link CategoryService}, имеет поля:
+ * {@link CategoryServiceImpl#categoryRepository},
+ * {@link CategoryServiceImpl#categoryMapper}
+ */
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
+    /**Репозиторий Категорий {@link CategoryRepository}*/
     private final CategoryRepository categoryRepository;
+
+    /**Маппер Категорий {@link CategoryMapper}*/
     private final CategoryMapper categoryMapper;
 
     @Override
