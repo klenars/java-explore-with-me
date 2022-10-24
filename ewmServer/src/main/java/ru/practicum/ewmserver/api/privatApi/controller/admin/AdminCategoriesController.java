@@ -1,9 +1,9 @@
-package ru.practicum.ewmserver.controller.admin;
+package ru.practicum.ewmserver.api.privatApi.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
-import ru.practicum.ewmserver.dto.category.NewCategoryDto;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewCategoryDto;
 import ru.practicum.ewmserver.service.admin.AdminCategoriesService;
 
 import javax.validation.Valid;

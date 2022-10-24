@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.controller.userPrivat;
+package ru.practicum.ewmserver.api.privatApi.controller.userPrivat;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

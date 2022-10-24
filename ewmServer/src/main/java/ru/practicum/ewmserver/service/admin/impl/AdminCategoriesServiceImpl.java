@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
-import ru.practicum.ewmserver.dto.category.NewCategoryDto;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewCategoryDto;
 import ru.practicum.ewmserver.entity.Category;
 import ru.practicum.ewmserver.error.ConflictError;
 import ru.practicum.ewmserver.mapper.CategoryMapper;

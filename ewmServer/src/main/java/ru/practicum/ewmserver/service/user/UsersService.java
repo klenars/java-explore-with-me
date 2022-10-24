@@ -2,8 +2,8 @@ package ru.practicum.ewmserver.service.user;
 
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.NewEventDto;
-import ru.practicum.ewmserver.dto.event.UpdateEventRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.userPrivat.dtoRequest.NewEventDto;
+import ru.practicum.ewmserver.api.privatApi.controller.userPrivat.dtoRequest.UpdateEventRequest;
 import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
 
 import java.util.List;

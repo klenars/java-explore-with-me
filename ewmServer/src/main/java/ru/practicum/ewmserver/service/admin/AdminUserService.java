@@ -1,6 +1,6 @@
 package ru.practicum.ewmserver.service.admin;
 
-import ru.practicum.ewmserver.dto.admin.NewUserRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewUserRequest;
 import ru.practicum.ewmserver.dto.user.UserDto;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewmserver.dto.admin.NewUserRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewUserRequest;
 import ru.practicum.ewmserver.dto.user.UserDto;
 import ru.practicum.ewmserver.entity.User;
 import ru.practicum.ewmserver.mapper.UserMapper;

@@ -1,10 +1,11 @@
-package ru.practicum.ewmserver.dto.event;
+package ru.practicum.ewmserver.api.publicApi.controller.requestParams;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import ru.practicum.ewmserver.specification.EventsRequestSpecification;
 
 import java.util.List;
 

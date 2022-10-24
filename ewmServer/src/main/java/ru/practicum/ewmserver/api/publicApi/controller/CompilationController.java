@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.controller;
+package ru.practicum.ewmserver.api.publicApi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

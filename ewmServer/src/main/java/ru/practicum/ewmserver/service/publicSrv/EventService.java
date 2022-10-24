@@ -2,7 +2,7 @@ package ru.practicum.ewmserver.service.publicSrv;
 
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.EventsRequestParams;
+import ru.practicum.ewmserver.api.publicApi.controller.requestParams.EventsRequestParams;
 
 import java.util.List;
 

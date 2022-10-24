@@ -2,7 +2,7 @@ package ru.practicum.ewmserver.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
-import ru.practicum.ewmserver.dto.admin.NewUserRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewUserRequest;
 import ru.practicum.ewmserver.dto.user.UserDto;
 import ru.practicum.ewmserver.dto.user.UserShortDto;
 import ru.practicum.ewmserver.entity.User;

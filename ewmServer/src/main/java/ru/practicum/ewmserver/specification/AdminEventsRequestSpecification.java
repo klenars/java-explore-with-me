@@ -1,7 +1,8 @@
-package ru.practicum.ewmserver.dto.admin;
+package ru.practicum.ewmserver.specification;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.requestParams.AdminEventsRequestParams;
 import ru.practicum.ewmserver.entity.Event;
 
 import javax.persistence.criteria.CriteriaBuilder;

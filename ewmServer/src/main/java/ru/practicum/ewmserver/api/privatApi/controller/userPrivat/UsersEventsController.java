@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.controller.userPrivat;
+package ru.practicum.ewmserver.api.privatApi.controller.userPrivat;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,8 +6,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.NewEventDto;
-import ru.practicum.ewmserver.dto.event.UpdateEventRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.userPrivat.dtoRequest.NewEventDto;
+import ru.practicum.ewmserver.api.privatApi.controller.userPrivat.dtoRequest.UpdateEventRequest;
 import ru.practicum.ewmserver.dto.participationRequest.ParticipationRequestDto;
 import ru.practicum.ewmserver.service.user.UsersService;
 

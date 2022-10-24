@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.NewEventDto;
+import ru.practicum.ewmserver.api.privatApi.controller.userPrivat.dtoRequest.NewEventDto;
 import ru.practicum.ewmserver.entity.Category;
 import ru.practicum.ewmserver.entity.Event;
 import ru.practicum.ewmserver.entity.User;

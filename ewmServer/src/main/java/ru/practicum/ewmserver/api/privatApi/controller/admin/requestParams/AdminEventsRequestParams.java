@@ -1,10 +1,11 @@
-package ru.practicum.ewmserver.dto.admin;
+package ru.practicum.ewmserver.api.privatApi.controller.admin.requestParams;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import ru.practicum.ewmserver.specification.AdminEventsRequestSpecification;
 import ru.practicum.ewmserver.entity.EventState;
 
 import java.util.List;

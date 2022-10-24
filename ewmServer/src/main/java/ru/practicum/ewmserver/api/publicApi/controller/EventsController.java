@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.controller;
+package ru.practicum.ewmserver.api.publicApi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.ewmserver.api.publicApi.controller.requestParams.EventsRequestParams;
 import ru.practicum.ewmserver.service.client.StatClient;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.EventsRequestParams;
 import ru.practicum.ewmserver.service.publicSrv.EventService;
 
 import javax.servlet.http.HttpServletRequest;

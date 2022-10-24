@@ -1,7 +1,9 @@
-package ru.practicum.ewmserver.dto.event;
+package ru.practicum.ewmserver.specification;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import ru.practicum.ewmserver.api.publicApi.controller.requestParams.EventSortType;
+import ru.practicum.ewmserver.api.publicApi.controller.requestParams.EventsRequestParams;
 import ru.practicum.ewmserver.entity.Event;
 
 import javax.persistence.criteria.CriteriaBuilder;

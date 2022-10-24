@@ -1,7 +1,7 @@
 package ru.practicum.ewmserver.service.admin;
 
 import ru.practicum.ewmserver.dto.compilation.CompilationDto;
-import ru.practicum.ewmserver.dto.compilation.NewCompilationDto;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewCompilationDto;
 
 public interface AdminCompilationsService {
     CompilationDto createCompilation(NewCompilationDto newCompilationDto);

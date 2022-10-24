@@ -3,7 +3,7 @@ package ru.practicum.ewmserver.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.practicum.ewmserver.dto.compilation.CompilationDto;
-import ru.practicum.ewmserver.dto.compilation.NewCompilationDto;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.NewCompilationDto;
 import ru.practicum.ewmserver.entity.Compilation;
 
 @Mapper(uses = EventMapper.class)

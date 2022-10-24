@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.dto.event.EventShortDto;
-import ru.practicum.ewmserver.dto.event.EventsRequestParams;
+import ru.practicum.ewmserver.api.publicApi.controller.requestParams.EventsRequestParams;
 import ru.practicum.ewmserver.entity.Event;
 import ru.practicum.ewmserver.entity.EventState;
 import ru.practicum.ewmserver.error.ForbiddenError;

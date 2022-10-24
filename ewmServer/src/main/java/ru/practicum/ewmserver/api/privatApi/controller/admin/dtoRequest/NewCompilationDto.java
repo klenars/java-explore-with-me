@@ -1,4 +1,4 @@
-package ru.practicum.ewmserver.dto.compilation;
+package ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest;
 
 import lombok.Getter;
 import lombok.Setter;

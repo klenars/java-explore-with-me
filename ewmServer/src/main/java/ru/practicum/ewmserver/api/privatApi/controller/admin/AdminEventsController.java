@@ -1,9 +1,9 @@
-package ru.practicum.ewmserver.controller.admin;
+package ru.practicum.ewmserver.api.privatApi.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewmserver.dto.admin.AdminEventsRequestParams;
-import ru.practicum.ewmserver.dto.admin.AdminUpdateEventRequest;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.requestParams.AdminEventsRequestParams;
+import ru.practicum.ewmserver.api.privatApi.controller.admin.dtoRequest.AdminUpdateEventRequest;
 import ru.practicum.ewmserver.dto.event.EventFullDto;
 import ru.practicum.ewmserver.service.admin.AdminEventsService;
 
