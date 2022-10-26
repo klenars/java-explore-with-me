@@ -1,0 +1,29 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ewm_server_db
+    username: postgres
+    password: 1705448
+
+ewmstat:
+  url: http://localhost:9090/hit
+
+---
+spring:
+  config:
+    activate:
+      on-profile: ci, test
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:ewm_server_db
+    username: test
+    password: test
