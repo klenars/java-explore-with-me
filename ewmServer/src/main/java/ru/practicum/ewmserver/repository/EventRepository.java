@@ -21,7 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
      * @param id id события
      * @return {@link Event}
      */
-    default Event getEventById(long id) {
+    default Event getById(Long id) {
         return findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Event id=%d not found!", id))
         );
@@ -51,4 +51,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
      */
     @Query("select (count(e) > 0) from events e where e.category.id = ?1")
     boolean areEventsWithCategory(Long catId);
+
+    @Query("select avg(e.rating) from events e where e.initiator.id = ?1 and e.rating is not null")
+    double avgRatingByInitiatorId(Long id);
 }

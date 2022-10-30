@@ -44,7 +44,7 @@ public class UserRequestsServiceImpl implements UserRequestsService {
     @Override
     public ParticipationRequestDto createRequest(long userId, long eventId) {
         User user = userRepository.getById(userId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkDataForNewRequest(user, event);
         ParticipationRequest request = getNewRequest(user, event);
 
@@ -58,7 +58,7 @@ public class UserRequestsServiceImpl implements UserRequestsService {
         userRepository.getById(userId);
 
         if (request.getStatus().equals(RequestStatus.CONFIRMED)) {
-            Event event = eventRepository.getEventById(request.getEvent().getId());
+            Event event = eventRepository.getById(request.getEvent().getId());
             event.setConfirmedRequests(event.getConfirmedRequests() - 1);
         }
 

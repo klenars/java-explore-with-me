@@ -88,7 +88,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public EventFullDto updateEvent(long userId, @NonNull UpdateEventRequest updateEventRequest) {
-        Event eventForUpdate = eventRepository.getEventById(updateEventRequest.getEventId());
+        Event eventForUpdate = eventRepository.getById(updateEventRequest.getEventId());
         checkEventState(eventForUpdate);
         updateEventFields(eventForUpdate, updateEventRequest);
         return eventMapper.toFullDto(eventForUpdate);
@@ -98,7 +98,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public EventFullDto getById(long userId, long eventId) {
         User user = userRepository.getById(userId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkEventInitiator(user, event);
 
         return eventMapper.toFullDto(event);
@@ -107,7 +107,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public EventFullDto cancelEvent(long userId, long eventId) {
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         User user = userRepository.getById(userId);
         checkEventInitiator(user, event);
         checkEventState(event);
@@ -120,7 +120,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<ParticipationRequestDto> getRequests(long userId, long eventId) {
         User user = userRepository.getById(userId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkEventInitiator(user, event);
 
         return requestRepository.getAllByEventId(eventId).stream()
@@ -132,7 +132,7 @@ public class UsersServiceImpl implements UsersService {
     @Transactional
     public ParticipationRequestDto confirmRequest(long userId, long eventId, long reqId) {
         User user = userRepository.getById(userId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkEventInitiator(user, event);
         ParticipationRequest request = requestRepository.getById(reqId);
         if (event.getParticipantLimit() == 0 || !event.isRequestModeration()) {
@@ -157,7 +157,7 @@ public class UsersServiceImpl implements UsersService {
     @Transactional
     public ParticipationRequestDto rejectRequest(long userId, long eventId, long reqId) {
         User user = userRepository.getById(userId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkEventInitiator(user, event);
         ParticipationRequest request = requestRepository.getById(reqId);
 

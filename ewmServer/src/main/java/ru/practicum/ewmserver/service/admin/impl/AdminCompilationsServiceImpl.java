@@ -53,7 +53,7 @@ public class AdminCompilationsServiceImpl implements AdminCompilationsService {
     @Transactional
     public void deleteEventFromCompilation(long compId, long eventId) {
         Compilation compilation = compilationRepository.getById(compId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
 
         compilation.getEvents().remove(event);
     }
@@ -62,7 +62,7 @@ public class AdminCompilationsServiceImpl implements AdminCompilationsService {
     @Transactional
     public void addEventToCompilation(long compId, long eventId) {
         Compilation compilation = compilationRepository.getById(compId);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
 
         compilation.getEvents().add(event);
     }

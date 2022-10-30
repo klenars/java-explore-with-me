@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс Entity Событие, содержит поля:
@@ -76,8 +78,15 @@ public class Event {
     /**Количество просмотрев события*/
     private long views;
 
+    /**Рейтинг события*/
+    private Double rating;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Feedback> feedbacks;
+
     public Event() {
         this.createdOn = LocalDateTime.now();
         this.state = EventState.PENDING;
+        this.feedbacks = new ArrayList<>();
     }
 }

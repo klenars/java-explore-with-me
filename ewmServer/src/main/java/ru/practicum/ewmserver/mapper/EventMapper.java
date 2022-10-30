@@ -51,6 +51,7 @@ public interface EventMapper {
     @Mapping(target = "category", expression = "java( category )")
     @Mapping(target = "initiator", expression = "java( initiator )")
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rating", ignore = true)
     Event toEntity(NewEventDto newEventDto, Category category, User initiator);
 
     default LocalDateTime parseDate(String date) {
