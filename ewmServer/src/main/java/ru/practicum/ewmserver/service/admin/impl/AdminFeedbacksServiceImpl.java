@@ -42,6 +42,7 @@ public class AdminFeedbacksServiceImpl implements AdminFeedbacksService {
     }
 
     @Override
+    @Transactional
     public FeedbackDtoOut approveFeedback(long feedId) {
         Feedback feedback = feedbackRepository.getById(feedId);
         feedback.setStatus(FeedbackStatus.MODERATED);

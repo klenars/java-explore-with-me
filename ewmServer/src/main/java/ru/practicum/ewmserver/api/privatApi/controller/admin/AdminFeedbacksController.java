@@ -24,7 +24,7 @@ public class AdminFeedbacksController {
         service.rejectFeedback(feedId);
     }
 
-    @PatchMapping("/{feedId}approve")
+    @PatchMapping("/{feedId}/approve")
     public FeedbackDtoOut approveFeedback(@PathVariable long feedId) {
         return service.approveFeedback(feedId);
     }
