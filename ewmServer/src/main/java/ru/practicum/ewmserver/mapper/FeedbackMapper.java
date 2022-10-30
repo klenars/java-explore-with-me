@@ -15,6 +15,7 @@ public interface FeedbackMapper {
     @Mapping(target = "id", ignore = true)
     Feedback dtoInToEntity(FeedbackDtoIn feedbackDtoIn, Event event, User user);
 
+    @Named("toDtoOut")
     @Mapping(target = "eventId", source = "event.id")
     @Mapping(target = "userId", source = "user.id")
     FeedbackDtoOut toDtoOut(Feedback feedback);

@@ -1,10 +1,11 @@
 package ru.practicum.ewmserver.dto.feedback;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * A DTO for the {@link ru.practicum.ewmserver.entity.Feedback} entity
@@ -13,9 +14,10 @@ import java.io.Serializable;
 @Setter
 public class FeedbackDtoOut implements Serializable {
     private Long id;
-    @Size(min = 5, max = 10000)
     private String text;
     private Integer score;
     private Long eventId;
     private Long userId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime created;
 }
