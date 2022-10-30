@@ -88,6 +88,9 @@ public class EventsRequestSpecification implements Specification<Event> {
                 case VIEWS:
                     query.orderBy(cb.desc(root.get("views")));
                     break;
+                case USER_RATING:
+                    query.orderBy(cb.desc(root.get("initiator").get("rating")));
+                    break;
             }
         }
 

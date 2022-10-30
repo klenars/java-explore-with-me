@@ -77,7 +77,6 @@ public class Event {
     private EventState state;
     /**Количество просмотрев события*/
     private long views;
-
     /**Рейтинг события*/
     private Double rating;
 

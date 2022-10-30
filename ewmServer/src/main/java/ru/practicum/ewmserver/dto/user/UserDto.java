@@ -18,4 +18,6 @@ public class UserDto {
     private String name;
     /**Почтовый адрес*/
     private String email;
+    /**Рейтинг*/
+    private Double rating;
 }

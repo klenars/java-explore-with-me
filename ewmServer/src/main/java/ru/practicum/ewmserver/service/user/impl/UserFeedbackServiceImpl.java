@@ -55,6 +55,15 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
         updateUserRating(event.getInitiator());
     }
 
+    @Override
+    public FeedbackDtoOut getById(long userId, long feedId) {
+        User user = userRepository.getById(userId);
+        Feedback feedback = feedbackRepository.getById(feedId);
+        checkFeedbackAuthor(feedback, user);
+
+        return feedbackMapper.toDtoOut(feedbackRepository.getById(feedId));
+    }
+
     private void checkFeedbackAuthor(Feedback feedback, User user) {
         if (!feedback.getUser().equals(user)) {
             throw new ForbiddenError(

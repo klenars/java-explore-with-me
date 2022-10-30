@@ -7,4 +7,6 @@ public interface UserFeedbackService {
     FeedbackDtoOut add(long userId, long eventId, FeedbackDtoIn feedback);
 
     void delete(long userId, long feedId);
+
+    FeedbackDtoOut getById(long userId, long feedId);
 }

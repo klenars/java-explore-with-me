@@ -31,4 +31,12 @@ public class UserFeedbackController {
     ) {
         userFeedbackService.delete(userId, feedId);
     }
+
+    @GetMapping("/{feedId}")
+    public FeedbackDtoOut getById(
+            @PathVariable long userId,
+            @PathVariable long feedId
+    ) {
+        return userFeedbackService.getById(userId, feedId);
+    }
 }

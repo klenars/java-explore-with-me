@@ -15,4 +15,6 @@ public class UserShortDto {
     private Long id;
     /**Имя*/
     private String name;
+    /**Рейтинг*/
+    private Double rating;
 }

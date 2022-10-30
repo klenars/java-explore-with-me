@@ -42,4 +42,6 @@ public class EventShortDto {
     private int confirmedRequests;
     /**Количество просмотрев события*/
     private long views;
+    /**Рейтинг события*/
+    private Double rating;
 }

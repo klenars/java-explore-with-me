@@ -70,6 +70,9 @@ public class EventFullDto {
     private EventState state;
     /**Количество просмотрев события*/
     private long views;
+    /**Рейтинг события*/
+    private Double rating;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FeedbackDtoOut> feedbacks;
 }
