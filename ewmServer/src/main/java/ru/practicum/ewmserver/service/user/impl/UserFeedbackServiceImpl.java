@@ -41,12 +41,18 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
     }
 
     @Override
+    @Transactional
     public void delete(long userId, long feedId) {
         User user = userRepository.getById(userId);
         Feedback feedback = feedbackRepository.getById(feedId);
         checkFeedbackAuthor(feedback, user);
+        Event event = feedback.getEvent();
 
+        event.getFeedbacks().remove(feedback);
         feedbackRepository.delete(feedback);
+
+        updateEventRating(event);
+        updateUserRating(event.getInitiator());
     }
 
     private void checkFeedbackAuthor(Feedback feedback, User user) {

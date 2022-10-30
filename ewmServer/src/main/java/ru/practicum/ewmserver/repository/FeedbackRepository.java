@@ -15,7 +15,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     }
 
     @Query("select avg(f.score) from Feedback f where f.event.id = ?1")
-    double avgScoreByEventId(Long id);
+    Double avgScoreByEventId(Long id);
 
     @Query("select (count(f) > 0) from Feedback f where f.event.id = ?1 and f.user.id = ?2")
     boolean existsByEventIdAndUserId(Long eventId, Long userId);

@@ -28,4 +28,11 @@ public class Feedback {
     private User user;
 
     private LocalDateTime created;
+
+    @Enumerated(EnumType.STRING)
+    private FeedbackStatus status;
+
+    public Feedback() {
+        status = FeedbackStatus.ON_MODERATION;
+    }
 }

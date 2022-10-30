@@ -53,5 +53,5 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     boolean areEventsWithCategory(Long catId);
 
     @Query("select avg(e.rating) from events e where e.initiator.id = ?1 and e.rating is not null")
-    double avgRatingByInitiatorId(Long id);
+    Double avgRatingByInitiatorId(Long id);
 }

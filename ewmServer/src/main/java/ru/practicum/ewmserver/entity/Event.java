@@ -81,7 +81,7 @@ public class Event {
     /**Рейтинг события*/
     private Double rating;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 
     public Event() {
