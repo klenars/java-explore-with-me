@@ -74,7 +74,8 @@ public class UsersServiceImpl implements UsersService {
         User initiator = userRepository.getById(userId);
         Category category = categoryRepository.getById(newEventDto.getCategory());
         Event newEvent = eventMapper.toEntity(newEventDto, category, initiator);
-        checkNewEventDate(newEvent);
+//        TODO закоментировнно для теста фичи (для создания сыбытий в прошлом)
+//        checkNewEventDate(newEvent);
         log.info("newEvent after mapping from NewEventDto: {}", newEvent);
 
         Location location = locationRepository.save(newEvent.getLocation());

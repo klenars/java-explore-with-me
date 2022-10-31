@@ -61,7 +61,8 @@ public class AdminEventsServiceImpl implements AdminEventsService {
     @Transactional
     public EventFullDto publishEvent(long eventId) {
         Event event = eventRepository.getById(eventId);
-        checkEventForPublish(event);
+//        TODO закоментировнно для теста фичи (для публикации сыбытий в прошлом)
+//        checkEventForPublish(event);
         event.setState(EventState.PUBLISHED);
         event.setPublishedOn(LocalDateTime.now());
 
