@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
  * {@link EventShortDto#paid},
  * {@link EventShortDto#confirmedRequests},
  * {@link EventShortDto#views},
+ * {@link EventShortDto#rating}
  */
 @Getter
 @Setter

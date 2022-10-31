@@ -52,6 +52,11 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     @Query("select (count(e) > 0) from events e where e.category.id = ?1")
     boolean areEventsWithCategory(Long catId);
 
+    /**
+     * Получить средний рейтинг событий по id инициатора
+     * @param id id инициатора
+     * @return Double
+     */
     @Query("select avg(e.rating) from events e where e.initiator.id = ?1 and e.rating is not null")
     Double avgRatingByInitiatorId(Long id);
 }

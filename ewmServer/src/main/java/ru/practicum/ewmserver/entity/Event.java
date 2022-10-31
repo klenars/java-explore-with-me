@@ -28,6 +28,7 @@ import java.util.List;
  * {@link Event#requestModeration},
  * {@link Event#state},
  * {@link Event#views},
+ * {@link Event#feedbacks}
  */
 @Entity(name = "events")
 @Getter
@@ -79,7 +80,7 @@ public class Event {
     private long views;
     /**Рейтинг события*/
     private Double rating;
-
+    /**Список отзывов нв событие*/
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 

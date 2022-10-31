@@ -72,7 +72,7 @@ public class EventFullDto {
     private long views;
     /**Рейтинг события*/
     private Double rating;
-
+    /**Список отзывов на события*/
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FeedbackDtoOut> feedbacks;
 }

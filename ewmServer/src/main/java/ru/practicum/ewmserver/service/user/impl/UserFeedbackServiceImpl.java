@@ -14,14 +14,27 @@ import ru.practicum.ewmserver.repository.RequestRepository;
 import ru.practicum.ewmserver.repository.UserRepository;
 import ru.practicum.ewmserver.service.user.UserFeedbackService;
 
+/**
+ * Реализация интерфейса {@link UserFeedbackService}, имеет поля:
+ * {@link UserFeedbackServiceImpl#feedbackRepository},
+ * {@link UserFeedbackServiceImpl#userRepository},
+ * {@link UserFeedbackServiceImpl#eventRepository},
+ * {@link UserFeedbackServiceImpl#requestRepository},
+ * {@link UserFeedbackServiceImpl#feedbackMapper},
+ */
 @Service
 @RequiredArgsConstructor
 public class UserFeedbackServiceImpl implements UserFeedbackService {
 
+    /**Репозиторий отзывов*/
     private final FeedbackRepository feedbackRepository;
+    /**Репозиторий юзеров*/
     private final UserRepository userRepository;
+    /**Репозиторий событий*/
     private final EventRepository eventRepository;
+    /**Репозиторий запросов на участие*/
     private final RequestRepository requestRepository;
+    /**Маппер отзывов*/
     private final FeedbackMapper feedbackMapper;
 
     @Override
@@ -64,6 +77,11 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
         return feedbackMapper.toDtoOut(feedbackRepository.getById(feedId));
     }
 
+    /**
+     * Проверка что юзер является автором отзыва
+     * @param feedback {@link Feedback}
+     * @param user {@link User}
+     */
     private void checkFeedbackAuthor(Feedback feedback, User user) {
         if (!feedback.getUser().equals(user)) {
             throw new ForbiddenError(
@@ -72,14 +90,32 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
         }
     }
 
+    /**
+     * Обновление рейтинга инициатора события
+     * @param initiator {@link User}
+     */
     private void updateUserRating(User initiator) {
         initiator.setRating(eventRepository.avgRatingByInitiatorId(initiator.getId()));
     }
 
+    /**
+     * Обновление рейтинга события
+     * @param event {@link Event}
+     */
     private void updateEventRating(Event event) {
         event.setRating(feedbackRepository.avgScoreByEventId(event.getId()));
     }
 
+    /**
+     * Проверки данных для создания нового отзыва:
+     * 1. Событие должно уже произойти (дата события в прошлом и статус PUBLISHED).
+     * 2. Отзыв оставляет не инициатор события.
+     * 3. Пользователь может оставить только 1 отзыв.
+     * 4. Пользователь участвовал в событии (есть подтвержденная от него заявка на событие).
+     * @param user {@link User}
+     * @param event {@link Event}
+     * @param feedbackDtoIn {@link FeedbackDtoIn}
+     */
     private void checkDataForFeedback(User user, Event event, FeedbackDtoIn feedbackDtoIn) {
         if (event.getEventDate().isAfter(feedbackDtoIn.getCreated())) {
             throw new ForbiddenError("Нельзя оставить отзыв на событие которое еще не произошло.");
@@ -88,6 +124,16 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
         if (!event.getState().equals(EventState.PUBLISHED)) {
             throw new ForbiddenError(
                     String.format("Событии id=%d было отклонено, отзыв оставить нельзя", event.getId())
+            );
+        }
+
+        if (event.getInitiator().equals(user)) {
+            throw new ForbiddenError(
+                    String.format(
+                            "Пользователь id=%d инициатор события id=%d, на свое событие отзыв оставить нельзя",
+                            user.getId(),
+                            event.getId()
+                    )
             );
         }
 

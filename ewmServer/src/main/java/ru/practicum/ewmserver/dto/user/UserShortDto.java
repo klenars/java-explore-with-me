@@ -6,7 +6,8 @@ import lombok.Setter;
 /**
  * Класс ДТО Пользователь (краткая информация), содержит поля:
  * {@link UserShortDto#id},
- * {@link UserShortDto#name}
+ * {@link UserShortDto#name},
+ * {@link UserShortDto#rating}
  */
 @Getter
 @Setter

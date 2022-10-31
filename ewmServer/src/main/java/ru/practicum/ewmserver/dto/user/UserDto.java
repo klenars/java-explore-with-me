@@ -8,6 +8,7 @@ import lombok.Setter;
  * {@link UserDto#id},
  * {@link UserDto#name},
  * {@link UserDto#email},
+ * {@link UserDto#rating}
  */
 @Getter
 @Setter

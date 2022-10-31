@@ -13,6 +13,7 @@ import java.util.Objects;
  * {@link User#id},
  * {@link User#name},
  * {@link User#email},
+ * {@link User#rating}
  */
 @Entity(name = "users")
 @Getter

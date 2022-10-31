@@ -9,19 +9,26 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * A DTO for the {@link Feedback} entity
+ * Класс входящего ДТО отзыва {@link Feedback}, содержит поля:
+ * {@link FeedbackDtoIn#text},
+ * {@link FeedbackDtoIn#score},
+ * {@link FeedbackDtoIn#created}
  */
 @Getter
 @Setter
 public class FeedbackDtoIn implements Serializable {
 
+    /**Текст отзыва*/
     @Size(min = 5, max = 10000)
     private String text;
 
+    /**Оценка событию*/
     private Integer score;
 
+    /**Дата создания отзыва*/
     private LocalDateTime created;
 
+    /**Конструктор по умолчанию присваивает дате создания текущую дату*/
     public FeedbackDtoIn() {
         this.created = LocalDateTime.now();
     }
