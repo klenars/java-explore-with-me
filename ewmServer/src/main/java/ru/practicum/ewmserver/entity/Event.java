@@ -80,7 +80,7 @@ public class Event {
     private long views;
     /**Рейтинг события*/
     private Double rating;
-    /**Список отзывов нв событие*/
+    /**Список отзывов на событие*/
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 

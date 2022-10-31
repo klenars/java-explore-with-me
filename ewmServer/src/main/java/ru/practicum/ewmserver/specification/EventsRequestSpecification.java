@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Спецификация для филбтрации Событий на публичный запрос, имеет поле:
+ * Спецификация для фильтрации Событий на публичный запрос, имеет поле:
  * {@link EventsRequestSpecification#params}
  */
 @AllArgsConstructor
