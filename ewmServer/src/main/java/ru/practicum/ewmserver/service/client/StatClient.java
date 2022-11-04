@@ -42,13 +42,19 @@ public class StatClient {
         makeAndSendRequest(hitDto);
     }
 
+    public void getViews(List<String> uris) {
+        String urisLine = uris.stream()
+                .map(u -> )
+        ViewsList viewsList = restTemplate.getForObject(statUrl + "stats&", ViewsList.class);
+    }
+
     /**
      * Подготовка и отправка запроса
      * @param body {@link EndpointHitDto}
      */
     private void makeAndSendRequest(@NonNull EndpointHitDto body) {
         HttpEntity<EndpointHitDto> requestEntity = new HttpEntity<>(body, defaultHeaders());
-        restTemplate.exchange(statUrl, HttpMethod.POST, requestEntity, Object.class);
+        restTemplate.exchange(statUrl + "hit", HttpMethod.POST, requestEntity, Object.class);
     }
 
     /**

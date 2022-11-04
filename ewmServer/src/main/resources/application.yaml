@@ -14,7 +14,7 @@ spring:
     password: 1705448
 
 ewmstat:
-  url: http://localhost:9090/hit
+  url: http://localhost:9090/
 
 ---
 spring:
