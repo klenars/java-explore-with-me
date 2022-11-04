@@ -2,6 +2,7 @@ package ru.practicum.ewmstat.service;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewmstat.entity.EndpointHit;
 import ru.practicum.ewmstat.repository.StatRepository;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 /**
  * Класс-реализация интерфейса сервиса статистики {@link StatService}
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StatServiceImpl implements StatService {
@@ -36,24 +38,21 @@ public class StatServiceImpl implements StatService {
     @Override
     public List<ViewStats> getStats(@NonNull StatsRequestParams params) {
         List<EndpointHit> hits = repository.findAll(params.toSpecification());
+        log.info("hits: {}", hits);
         List<ViewStats> viewStats = hits.stream()
                 .filter(distinctByKey(EndpointHit::getUri))
                 .map(this::mapHitToView)
                 .collect(Collectors.toList());
-
-        if (params.isUnique()) {
-            return viewStats.stream()
-                    .peek(vs -> vs.setHits(repository.countDistinctByUri(vs.getUri(), params.getStart(), params.getEnd())))
-                    .collect(Collectors.toList());
-        } else {
-            return viewStats.stream()
-                    .peek(vs -> vs.setHits(repository.countByUri(vs.getUri(), params.getStart(), params.getEnd())))
-                    .collect(Collectors.toList());
-        }
+        log.info("viewStats: {}", viewStats);
+        return viewStats.stream()
+                .peek(vs -> vs.setHits(repository.countHitsByUri(vs.getUri())))
+                .peek(vs -> log.info("stat with hits: {}", vs))
+                .collect(Collectors.toList());
     }
 
     /**
      * Метод маппинга {@link EndpointHit} в {@link ViewStats}
+     *
      * @param hit {@link EndpointHit}
      * @return {@link ViewStats}
      */

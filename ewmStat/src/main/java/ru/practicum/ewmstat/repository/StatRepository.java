@@ -3,6 +3,7 @@ package ru.practicum.ewmstat.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.Nullable;
 import ru.practicum.ewmstat.entity.EndpointHit;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,10 @@ public interface StatRepository extends JpaRepository<EndpointHit, Long>, JpaSpe
      * @param end конец интересующего периода
      * @return long колличество обращений
      */
+
     @Query("select count(h) from hits h where h.uri = ?1 and h.timestamp >= ?2 and h.timestamp <= ?3")
-    long countByUri(String uri, LocalDateTime start, LocalDateTime end);
+    long countByUri(String uri, @Nullable LocalDateTime start, @Nullable LocalDateTime end);
+
+    @Query("select count(h) from hits h where h.uri = ?1")
+    long countHitsByUri(String uri);
 }

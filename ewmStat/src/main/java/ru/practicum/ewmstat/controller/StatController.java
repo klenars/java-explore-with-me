@@ -1,6 +1,7 @@
 package ru.practicum.ewmstat.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmstat.entity.EndpointHit;
 import ru.practicum.ewmstat.service.StatService;
@@ -13,6 +14,7 @@ import java.util.List;
  * Контроллер сервиса статистики
  * содержит поле класса {@link StatService}
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class StatController {
@@ -35,6 +37,9 @@ public class StatController {
      */
     @GetMapping("/stats")
     public List<ViewStats> getStats(StatsRequestParams params) {
-        return statService.getStats(params);
+        log.info("GET stats with params: {}", params);
+        List<ViewStats> stats = statService.getStats(params);
+        log.info("return List stats: {}", stats);
+        return stats;
     }
 }

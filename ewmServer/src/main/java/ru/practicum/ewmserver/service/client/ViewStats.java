@@ -3,6 +3,8 @@ package ru.practicum.ewmserver.service.client;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Класс для выдачи данных статистики по конкретному url приложения,
  * содержит поля:
@@ -12,7 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ViewStats {
+public class ViewStats implements Serializable {
     /**Поле указатель на приложение*/
     private String app;
 

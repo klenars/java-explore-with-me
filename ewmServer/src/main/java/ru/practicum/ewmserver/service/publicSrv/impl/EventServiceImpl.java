@@ -12,6 +12,7 @@ import ru.practicum.ewmserver.entity.EventState;
 import ru.practicum.ewmserver.error.ForbiddenError;
 import ru.practicum.ewmserver.mapper.EventMapper;
 import ru.practicum.ewmserver.repository.EventRepository;
+import ru.practicum.ewmserver.service.client.StatClient;
 import ru.practicum.ewmserver.service.publicSrv.EventService;
 
 import java.util.List;
@@ -32,20 +33,29 @@ public class EventServiceImpl implements EventService {
     /**Маппер событий {@link EventMapper}*/
     private final EventMapper eventMapper;
 
+    private final StatClient statClient;
+
     @Override
     @Transactional
     public EventFullDto getEventById(long id) {
         Event event = eventRepository.getEventById(id);
         checkEventStatus(event);
-        event.setViews(event.getViews() + 1);
 
-        return eventMapper.toFullDto(event);
+        var views = statClient.getViewsMap(List.of(event));
+        var dto = eventMapper.toFullDto(event);
+        dto.setViews(views.getOrDefault(dto.getId(), 0L));
+
+        return dto;
     }
 
     @Override
     public List<EventShortDto> getAllEvents(@NonNull EventsRequestParams params) {
-        return eventRepository.findAll(params.toSpecification(), params.toPageable()).stream()
+        var events = eventRepository.findAll(params.toSpecification(), params.toPageable());
+        var views = statClient.getViewsMap(events.toList());
+
+        return events.stream()
                 .map(eventMapper::toShortDto)
+                .peek(dto -> dto.setViews(views.getOrDefault(dto.getId(), 0L)))
                 .collect(Collectors.toList());
     }
 

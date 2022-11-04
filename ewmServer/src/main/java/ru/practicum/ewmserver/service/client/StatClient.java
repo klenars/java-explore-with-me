@@ -1,6 +1,7 @@
 package ru.practicum.ewmserver.service.client;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import ru.practicum.ewmserver.entity.Event;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
  * {@link StatClient#restTemplate},
  * {@link StatClient#statUrl}
  */
+@Slf4j
 @Service
 public class StatClient {
 
@@ -47,12 +50,16 @@ public class StatClient {
     }
 
     public Map<Long, Long> getViewsMap(List<Event> events) {
-        String urisLine = "uris=";
-        urisLine += events.stream()
-                .map(e -> "&uris=/events/" + e.getId())
-                .collect(Collectors.joining());
-        ViewsList viewsList = restTemplate.getForObject(statUrl + "stats?" + urisLine, ViewsList.class);
-        return viewsList.getViews().stream()
+        List<String> uris = events.stream()
+                .map(e -> "/events/" + e.getId())
+                .collect(Collectors.toList());
+        String urisLine = "uris=" + String.join("&uris=", uris);
+        log.info(urisLine);
+        String url = statUrl + "stats?" + urisLine;
+        log.info(url);
+        ViewStats[] viewsList = restTemplate.getForObject(url, ViewStats[].class);
+        assert viewsList != null;
+        return Arrays.stream(viewsList)
                 .collect(Collectors.toMap(vs -> {
                     String[] uri = vs.getUri().split("/");
                     return Long.parseLong(uri[2]);

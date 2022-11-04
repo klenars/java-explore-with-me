@@ -2,6 +2,7 @@ package ru.practicum.ewmstat.specification;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@ToString
 public class StatsRequestParams {
 
     /**Начало периода*/

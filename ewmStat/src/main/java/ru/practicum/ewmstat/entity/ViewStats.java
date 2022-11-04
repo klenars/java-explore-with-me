@@ -2,6 +2,7 @@ package ru.practicum.ewmstat.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Класс для выдачи данных статистики по конкретному url приложения,
@@ -12,6 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class ViewStats {
     /**Поле указатель на приложение*/
     private String app;
