@@ -17,13 +17,13 @@ import javax.persistence.EntityNotFoundException;
 public class ErrorHandler {
 
     /**
-     * обработка ConstraintViolationException
-     * @param exception {@link ConstraintViolationException}
+     * Обработка ошибок целостности двнных
+     * @param exception {@link RuntimeException}
      * @return {@link ApiError}
      */
-    @ExceptionHandler
+    @ExceptionHandler({ConstraintViolationException.class, ConflictError.class})
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handleConflictError(final ConstraintViolationException exception) {
+    public ApiError handleConflictError(final RuntimeException exception) {
         return new ApiError(exception, "Запрос приводит к нарушению целостности данных.", HttpStatus.CONFLICT);
     }
 
@@ -39,36 +39,14 @@ public class ErrorHandler {
     }
 
     /**
-     * обработка IllegalArgumentException
-     * @param exception {@link IllegalArgumentException}
+     * обработка Ошибок запроса
+     * @param exception {@link RuntimeException}
      * @return {@link ApiError}
      */
-    @ExceptionHandler
+    @ExceptionHandler({IllegalArgumentException.class, javax.validation.ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleIllegalArgumentException(final IllegalArgumentException exception) {
+    public ApiError handleIllegalArgumentException(final RuntimeException exception) {
         return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
-    }
-
-    /**
-     * обработка javax.validation.ConstraintViolationException
-     * @param exception {@link javax.validation.ConstraintViolationException}
-     * @return {@link ApiError}
-     */
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleConstraintViolationException(final javax.validation.ConstraintViolationException exception) {
-        return new ApiError(exception, "Ошибка запроса", HttpStatus.BAD_REQUEST);
-    }
-
-    /**
-     * обработка ConflictError
-     * @param exception {@link ConflictError}
-     * @return {@link ApiError}
-     */
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handleConflictError(final ConflictError exception) {
-        return new ApiError(exception, "Запрос приводит к нарушению целостности данных.", HttpStatus.CONFLICT);
     }
 
     /**

@@ -82,6 +82,7 @@ public class Event {
     private Double rating;
     /**Список отзывов на событие*/
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Feedback> feedbacks;
 
     public Event() {

@@ -2,8 +2,11 @@ package ru.practicum.ewmserver.dto.feedback;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import ru.practicum.ewmserver.entity.Feedback;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,13 +19,16 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 public class FeedbackDtoIn implements Serializable {
 
     /**Текст отзыва*/
     @Size(min = 5, max = 10000)
     private String text;
 
-    /**Оценка событию*/
+    /**Оценка события*/
+    @Min(1)
+    @Max(10)
     private Integer score;
 
     /**Дата создания отзыва*/

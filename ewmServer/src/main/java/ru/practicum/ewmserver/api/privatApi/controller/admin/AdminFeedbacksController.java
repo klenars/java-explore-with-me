@@ -1,6 +1,7 @@
 package ru.practicum.ewmserver.api.privatApi.controller.admin;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewmserver.dto.feedback.FeedbackDtoOut;
 import ru.practicum.ewmserver.service.admin.AdminFeedbacksService;
@@ -11,6 +12,7 @@ import java.util.List;
  * Контроллер по обработке запросов от админа по отзывам на события, имеет поле:
  * {@link AdminFeedbacksController#service}
  */
+@Slf4j
 @RestController
 @RequestMapping("/admin/feedbacks")
 @RequiredArgsConstructor
@@ -25,6 +27,9 @@ public class AdminFeedbacksController {
      */
     @GetMapping
     public List<FeedbackDtoOut> getAllNewFeedbacks() {
+        log.info("GET request getAllNewFeedbacks");
+        List<FeedbackDtoOut> feedbacks = service.getAllNewFeedbacks();
+        log.info("getAllNewFeedbacks returned feedbacks: {}", feedbacks);
         return service.getAllNewFeedbacks();
     }
 
@@ -34,6 +39,7 @@ public class AdminFeedbacksController {
      */
     @PatchMapping("/{feedId}/reject")
     public void rejectFeedback(@PathVariable long feedId) {
+        log.info("PATCH request rejectFeedback feedId: {}", feedId);
         service.rejectFeedback(feedId);
     }
 
@@ -44,6 +50,9 @@ public class AdminFeedbacksController {
      */
     @PatchMapping("/{feedId}/approve")
     public FeedbackDtoOut approveFeedback(@PathVariable long feedId) {
-        return service.approveFeedback(feedId);
+        log.info("PATCH request approveFeedback feedId: {}", feedId);
+        FeedbackDtoOut feedbackDtoOut = service.approveFeedback(feedId);
+        log.info("approveFeedback returned feedback: {}", feedbackDtoOut);
+        return feedbackDtoOut;
     }
 }
