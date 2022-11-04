@@ -6,10 +6,13 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.practicum.ewmserver.dto.client.EndpointHitDto;
+import ru.practicum.ewmserver.entity.Event;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Сервис клиент для сохранения данных статистики, имеет поля:
@@ -30,6 +33,7 @@ public class StatClient {
 
     /**
      * Отправка запроса на сохранение данных статистики
+     *
      * @param request {@link HttpServletRequest}
      */
     public void postHit(@NonNull HttpServletRequest request) {
@@ -42,14 +46,22 @@ public class StatClient {
         makeAndSendRequest(hitDto);
     }
 
-    public void getViews(List<String> uris) {
-        String urisLine = uris.stream()
-                .map(u -> )
-        ViewsList viewsList = restTemplate.getForObject(statUrl + "stats&", ViewsList.class);
+    public Map<Long, Long> getViewsMap(List<Event> events) {
+        String urisLine = "uris=";
+        urisLine += events.stream()
+                .map(e -> "&uris=/events/" + e.getId())
+                .collect(Collectors.joining());
+        ViewsList viewsList = restTemplate.getForObject(statUrl + "stats?" + urisLine, ViewsList.class);
+        return viewsList.getViews().stream()
+                .collect(Collectors.toMap(vs -> {
+                    String[] uri = vs.getUri().split("/");
+                    return Long.parseLong(uri[2]);
+                }, ViewStats::getHits));
     }
 
     /**
      * Подготовка и отправка запроса
+     *
      * @param body {@link EndpointHitDto}
      */
     private void makeAndSendRequest(@NonNull EndpointHitDto body) {
@@ -59,6 +71,7 @@ public class StatClient {
 
     /**
      * Присвоение запросу стандартных заголовков
+     *
      * @return {@link HttpHeaders}
      */
     private HttpHeaders defaultHeaders() {

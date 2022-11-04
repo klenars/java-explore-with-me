@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
  * {@link Event#publishedOn},
  * {@link Event#requestModeration},
  * {@link Event#state},
- * {@link Event#views},
+ *
  */
 @Entity(name = "events")
 @Getter
@@ -74,7 +74,7 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventState state;
     /**Количество просмотрев события*/
-    private long views;
+//    private long views;
 
     public Event() {
         this.createdOn = LocalDateTime.now();

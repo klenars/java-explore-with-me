@@ -65,6 +65,7 @@ public class EventFullDto {
     private boolean requestModeration;
     /**Список состояний жизненного цикла события*/
     private EventState state;
+
     /**Количество просмотрев события*/
     private long views;
 }

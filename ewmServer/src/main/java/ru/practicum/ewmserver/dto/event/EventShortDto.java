@@ -40,6 +40,7 @@ public class EventShortDto {
     private boolean paid;
     /**Количество одобренных заявок на участие в данном событии*/
     private int confirmedRequests;
+
     /**Количество просмотрев события*/
     private long views;
 }
