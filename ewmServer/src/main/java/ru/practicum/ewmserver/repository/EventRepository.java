@@ -10,6 +10,7 @@ import ru.practicum.ewmserver.entity.Event;
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Интерфейс репозитория событий {@link Event}
@@ -58,5 +59,5 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
      * @return Double
      */
     @Query("select avg(e.rating) from events e where e.initiator.id = ?1 and e.rating is not null")
-    Double avgRatingByInitiatorId(Long id);
+    Optional<Double> avgRatingByInitiatorId(Long id);
 }

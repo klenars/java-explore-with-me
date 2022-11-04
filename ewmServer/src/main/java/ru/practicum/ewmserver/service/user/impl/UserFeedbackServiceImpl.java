@@ -95,7 +95,7 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
      * @param initiator {@link User}
      */
     private void updateUserRating(User initiator) {
-        initiator.setRating(eventRepository.avgRatingByInitiatorId(initiator.getId()));
+        initiator.setRating(eventRepository.avgRatingByInitiatorId(initiator.getId()).orElse(0.0));
     }
 
     /**
@@ -103,7 +103,7 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
      * @param event {@link Event}
      */
     private void updateEventRating(Event event) {
-        event.setRating(feedbackRepository.avgScoreByEventId(event.getId()));
+        event.setRating(feedbackRepository.avgScoreByEventId(event.getId()).orElse(0.0));
     }
 
     /**

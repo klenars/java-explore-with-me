@@ -17,5 +17,5 @@ public class UserShortDto {
     /**Имя*/
     private String name;
     /**Рейтинг*/
-    private Double rating;
+    private double rating;
 }

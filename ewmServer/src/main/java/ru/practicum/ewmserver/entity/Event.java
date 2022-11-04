@@ -79,7 +79,7 @@ public class Event {
     /**Количество просмотрев события*/
     private long views;
     /**Рейтинг события*/
-    private Double rating;
+    private double rating;
     /**Список отзывов на событие*/
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude

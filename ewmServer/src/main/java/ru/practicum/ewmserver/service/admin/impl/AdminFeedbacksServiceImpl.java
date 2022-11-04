@@ -64,7 +64,7 @@ public class AdminFeedbacksServiceImpl implements AdminFeedbacksService {
      * @param initiator {@link User} инициатор события
      */
     private void updateUserRating(User initiator) {
-        initiator.setRating(eventRepository.avgRatingByInitiatorId(initiator.getId()));
+        initiator.setRating(eventRepository.avgRatingByInitiatorId(initiator.getId()).orElse(0.0));
     }
 
     /**
@@ -72,6 +72,6 @@ public class AdminFeedbacksServiceImpl implements AdminFeedbacksService {
      * @param event {@link Event}
      */
     private void updateEventRating(Event event) {
-        event.setRating(feedbackRepository.avgScoreByEventId(event.getId()));
+        event.setRating(feedbackRepository.avgScoreByEventId(event.getId()).orElse(0.0));
     }
 }

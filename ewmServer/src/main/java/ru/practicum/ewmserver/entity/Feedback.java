@@ -30,7 +30,7 @@ public class Feedback {
     @Size(min = 5, max = 10000)
     private String text;
     /**Оценка событию*/
-    private Integer score;
+    private int score;
     /**Событие*/
     @ManyToOne
     private Event event;

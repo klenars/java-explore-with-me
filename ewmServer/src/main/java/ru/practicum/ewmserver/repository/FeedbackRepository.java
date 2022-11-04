@@ -7,6 +7,7 @@ import ru.practicum.ewmserver.entity.FeedbackStatus;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Интерфейс репозитория отзывов {@link Feedback}
@@ -17,7 +18,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
      * Плучить отзыв по id
      * @param id id отзыва
      * @return {@link Feedback}
-     * @throws {@link EntityNotFoundException}
+     * @throws EntityNotFoundException
      */
     default Feedback getById(long id) {
         return findById(id).orElseThrow(
@@ -39,7 +40,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
      * @return Double
      */
     @Query("select avg(f.score) from Feedback f where f.event.id = ?1 and f.status <> 'REJECTED'")
-    Double avgScoreByEventId(Long id);
+    Optional<Double> avgScoreByEventId(Long id);
 
     /**
      * Проверка надичия отзыва по id юзера и id события

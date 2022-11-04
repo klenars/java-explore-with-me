@@ -34,7 +34,7 @@ public class User {
     private String email;
 
     /**Рейтинг юзера по рейтингу его прошедших событий*/
-    private Double rating;
+    private double rating;
 
     @Override
     public boolean equals(Object o) {

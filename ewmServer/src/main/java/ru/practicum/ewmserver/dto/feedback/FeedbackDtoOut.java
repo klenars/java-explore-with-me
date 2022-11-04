@@ -28,7 +28,7 @@ public class FeedbackDtoOut implements Serializable {
     /**Текст отзыва*/
     private String text;
     /**Оценка событию*/
-    private Integer score;
+    private int score;
     /**id события*/
     private Long eventId;
     /**id юзера написавшего отзыв*/

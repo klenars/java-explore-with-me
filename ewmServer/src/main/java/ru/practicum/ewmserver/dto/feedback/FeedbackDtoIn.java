@@ -29,7 +29,7 @@ public class FeedbackDtoIn implements Serializable {
     /**Оценка события*/
     @Min(1)
     @Max(10)
-    private Integer score;
+    private int score;
 
     /**Дата создания отзыва*/
     private LocalDateTime created;

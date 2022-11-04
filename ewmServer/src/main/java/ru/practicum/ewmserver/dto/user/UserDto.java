@@ -20,5 +20,5 @@ public class UserDto {
     /**Почтовый адрес*/
     private String email;
     /**Рейтинг*/
-    private Double rating;
+    private double rating;
 }

@@ -46,5 +46,5 @@ public class EventShortDto {
     private long views;
     /**Рейтинг события*/
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Double rating;
+    private double rating;
 }
