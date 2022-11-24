@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public EventFullDto getEventById(long id) {
-        Event event = eventRepository.getEventById(id);
+        Event event = eventRepository.getById(id);
         checkEventStatus(event);
         event.setViews(event.getViews() + 1);
 

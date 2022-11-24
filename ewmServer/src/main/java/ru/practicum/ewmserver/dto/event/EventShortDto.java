@@ -1,6 +1,7 @@
 package ru.practicum.ewmserver.dto.event;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
  * {@link EventShortDto#paid},
  * {@link EventShortDto#confirmedRequests},
  * {@link EventShortDto#views},
+ * {@link EventShortDto#rating}
  */
 @Getter
 @Setter
@@ -42,4 +44,7 @@ public class EventShortDto {
     private int confirmedRequests;
     /**Количество просмотрев события*/
     private long views;
+    /**Рейтинг события*/
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private double rating;
 }

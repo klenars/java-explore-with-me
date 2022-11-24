@@ -51,13 +51,23 @@ public interface RequestRepository extends JpaRepository<ParticipationRequest, L
     List<ParticipationRequest> getAllByUserId(Long id);
 
     /**
-     * Проверка существует ли уже сапрос на событие от этого юзера
+     * Проверка существует ли уже запрос на событие от этого юзера
      * @param eventId id события
      * @param userId id юзера
      * @return boolean
      */
     @Query("select (count(r) > 0) from requests r where r.event.id = ?1 and r.requester.id = ?2")
     boolean requestAlreadyExist(Long eventId, Long userId);
+
+    /**
+     * Проверка существует ли запрос с определенным статусом на событие от этого юзера
+     * @param eventId id события
+     * @param userId id юзера
+     * @param status {@link RequestStatus}
+     * @return boolean
+     */
+    @Query("select (count(r) > 0) from requests r where r.event.id = ?1 and r.requester.id = ?2 and r.status = ?3")
+    boolean existsByEventIdAndRequesterIdAndStatus(Long eventId, Long userId, RequestStatus status);
 
     /**
      * Колличество запросов по id события c определенным статусом

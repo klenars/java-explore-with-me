@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Маппер Событий
  */
-@Mapper(uses = {CategoryMapper.class, LocationMapper.class, UserMapper.class})
+@Mapper(uses = {CategoryMapper.class, LocationMapper.class, UserMapper.class, FeedbackMapper.class})
 public interface EventMapper {
 
     /**
@@ -27,6 +27,7 @@ public interface EventMapper {
     @Mapping(target = "category", qualifiedByName = "toDto")
     @Mapping(target = "initiator", qualifiedByName = "toShortDto")
     @Mapping(target = "location", qualifiedByName = "toDto")
+    @Mapping(target = "feedbacks", qualifiedByName = "toDtoOut")
     EventFullDto toFullDto(Event event);
 
     /**
@@ -51,6 +52,7 @@ public interface EventMapper {
     @Mapping(target = "category", expression = "java( category )")
     @Mapping(target = "initiator", expression = "java( initiator )")
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "rating", ignore = true)
     Event toEntity(NewEventDto newEventDto, Category category, User initiator);
 
     default LocalDateTime parseDate(String date) {

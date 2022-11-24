@@ -60,8 +60,9 @@ public class AdminEventsServiceImpl implements AdminEventsService {
     @Override
     @Transactional
     public EventFullDto publishEvent(long eventId) {
-        Event event = eventRepository.getEventById(eventId);
-        checkEventForPublish(event);
+        Event event = eventRepository.getById(eventId);
+//        TODO закоментировнно для теста фичи (для публикации сыбытий в прошлом)
+//        checkEventForPublish(event);
         event.setState(EventState.PUBLISHED);
         event.setPublishedOn(LocalDateTime.now());
 
@@ -71,7 +72,7 @@ public class AdminEventsServiceImpl implements AdminEventsService {
     @Override
     @Transactional
     public EventFullDto rejectEvent(long eventId) {
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         checkEventForReject(event);
         event.setState(EventState.CANCELED);
 
@@ -82,7 +83,7 @@ public class AdminEventsServiceImpl implements AdminEventsService {
     @Transactional
     public EventFullDto updateEvent(long eventId, @NonNull AdminUpdateEventRequest updateEventRequest) {
         log.info("get AdminUpdateEventRequest: {}", updateEventRequest);
-        Event event = eventRepository.getEventById(eventId);
+        Event event = eventRepository.getById(eventId);
         log.info("event from bd: {}", event);
         updateEventFields(event, updateEventRequest);
         log.info("event after update: {}", event);

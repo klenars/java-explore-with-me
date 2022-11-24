@@ -1,14 +1,17 @@
 package ru.practicum.ewmserver.dto.event;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import ru.practicum.ewmserver.dto.category.CategoryDto;
+import ru.practicum.ewmserver.dto.feedback.FeedbackDtoOut;
 import ru.practicum.ewmserver.dto.location.LocationDto;
 import ru.practicum.ewmserver.dto.user.UserShortDto;
 import ru.practicum.ewmserver.entity.EventState;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Класс ДТО с полной информацией о событии, содержит поля:
@@ -67,4 +70,9 @@ public class EventFullDto {
     private EventState state;
     /**Количество просмотрев события*/
     private long views;
+    /**Рейтинг события*/
+    private double rating;
+    /**Список отзывов на события*/
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<FeedbackDtoOut> feedbacks;
 }

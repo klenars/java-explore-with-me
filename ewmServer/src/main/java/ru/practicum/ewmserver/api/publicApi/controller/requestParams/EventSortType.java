@@ -6,7 +6,8 @@ package ru.practicum.ewmserver.api.publicApi.controller.requestParams;
 public enum EventSortType {
     /**Сортировка по дате*/
     EVENT_DATE,
-
     /**Сортировка по колличеству просмотров*/
-    VIEWS
+    VIEWS,
+    /**Сортировка по рейтингу инициатора события*/
+    USER_RATING
 }

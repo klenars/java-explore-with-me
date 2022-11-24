@@ -8,6 +8,7 @@ import lombok.Setter;
  * {@link UserDto#id},
  * {@link UserDto#name},
  * {@link UserDto#email},
+ * {@link UserDto#rating}
  */
 @Getter
 @Setter
@@ -18,4 +19,6 @@ public class UserDto {
     private String name;
     /**Почтовый адрес*/
     private String email;
+    /**Рейтинг*/
+    private double rating;
 }

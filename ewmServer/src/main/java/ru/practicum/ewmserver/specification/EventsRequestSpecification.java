@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Спецификация для филбтрации Событий на публичный запрос, имеет поле:
+ * Спецификация для фильтрации Событий на публичный запрос, имеет поле:
  * {@link EventsRequestSpecification#params}
  */
 @AllArgsConstructor
@@ -87,6 +87,9 @@ public class EventsRequestSpecification implements Specification<Event> {
                     break;
                 case VIEWS:
                     query.orderBy(cb.desc(root.get("views")));
+                    break;
+                case USER_RATING:
+                    query.orderBy(cb.desc(root.get("initiator").get("rating")));
                     break;
             }
         }
